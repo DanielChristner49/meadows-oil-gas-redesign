@@ -1,0 +1,120 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  --color-brand-navy: #1a2744;
+  --color-brand-navy-light: #253561;
+  --color-brand-gold: #d4971a;
+  --color-brand-gold-light: #e8b84b;
+  --color-brand-green: #2d7d3a;
+  --color-brand-green-light: #3d9e4c;
+  --color-brand-cream: #f8f7f4;
+  --color-brand-charcoal: #1c1c1c;
+  --color-brand-gray: #6b7280;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: Georgia, Cambria, serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-brand-cream);
+    color: var(--color-brand-charcoal);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  @media (min-width: 640px) {
+    .section-padding {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+  }
+
+  .container-max {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    background-color: var(--color-brand-gold);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-brand-gold-light);
+  }
+
+  .btn-outline {
+    border: 2px solid var(--color-brand-gold);
+    color: var(--color-brand-gold);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-brand-gold);
+    color: white;
+  }
+
+  .section-title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-family: var(--font-serif);
+    color: var(--color-brand-navy);
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    .section-title {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  .section-subtitle {
+    color: var(--color-brand-gray);
+    font-size: 1.125rem;
+    max-width: 42rem;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(135deg, rgba(26,39,68,0.85) 0%, rgba(26,39,68,0.5) 100%);
+  }
+
+  .wind-accent {
+    border-left: 4px solid var(--color-brand-green);
+    background-color: #f0fdf4;
+  }
+}
