@@ -12,7 +12,7 @@ export default function ContactPage() {
     <div className="section-padding container-max">
       <h1 className="section-title">Contact Us</h1>
       <p className="section-subtitle mb-12">
-        Ready to discuss your land or energy project? Reach out and we'll respond within one business day.
+        Ready to discuss your land or energy project? Reach out and we&apos;ll respond within one business day.
       </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">

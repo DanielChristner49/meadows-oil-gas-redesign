@@ -12,7 +12,7 @@ interface Service {
 
 export default function ServiceAccordion({ services }: { services: Service[] }) {
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <Accordion className="w-full">
       {services.map(({ title, content }, i) => (
         <AccordionItem key={title} value={`item-${i}`}>
           <AccordionTrigger

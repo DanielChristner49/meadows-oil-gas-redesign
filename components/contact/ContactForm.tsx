@@ -41,7 +41,7 @@ export default function ContactForm({ formEndpoint }: { formEndpoint: string }) 
         <p className="font-semibold text-lg" style={{ color: 'var(--color-brand-green)' }}>
           Thank you!
         </p>
-        <p className="text-gray-600 mt-2 text-sm">We'll be in touch within one business day.</p>
+        <p className="text-gray-600 mt-2 text-sm">We&apos;ll be in touch within one business day.</p>
       </div>
     )
   }

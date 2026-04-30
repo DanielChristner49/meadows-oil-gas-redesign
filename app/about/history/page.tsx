@@ -49,7 +49,7 @@ export default function HistoryPage() {
     <div className="section-padding container-max">
       <h1 className="section-title">Our History</h1>
       <p className="section-subtitle mb-16">
-        From the early days of American oil to today's renewable energy transition.
+        From the early days of American oil to today&apos;s renewable energy transition.
       </p>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
         <div>
