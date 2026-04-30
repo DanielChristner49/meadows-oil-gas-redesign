@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
 import ServiceAccordion from '@/components/services/ServiceAccordion'
 import WindLeasingBanner from '@/components/services/WindLeasingBanner'
+import { getServicesByCategory } from '@/lib/sanity/queries'
 
 export const metadata: Metadata = { title: 'Brokerage & Land Services' }
 
-const services = [
+export const revalidate = 3600
+
+const staticServices = [
   {
     title: 'Leasehold Acquisitions',
     content: 'We negotiate and acquire oil and gas leases on behalf of operators, handling all aspects of landowner contact, lease terms negotiation, and execution. Our landmen understand local mineral ownership patterns and lease market conditions across Oklahoma and California.',
@@ -23,7 +26,18 @@ const services = [
   },
 ]
 
-export default function BrokeragePage() {
+export default async function BrokeragePage() {
+  let services = staticServices
+
+  try {
+    const sanityServices = await getServicesByCategory('brokerage')
+    if (sanityServices.length > 0) {
+      services = sanityServices.map(({ title, content }) => ({ title, content }))
+    }
+  } catch {
+    // Sanity not configured yet — fall back to static content
+  }
+
   return (
     <div className="section-padding container-max">
       <h1 className="section-title">Brokerage & Land Services</h1>

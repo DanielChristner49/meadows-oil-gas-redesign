@@ -1,9 +1,12 @@
 import type { Metadata } from 'next'
 import ServiceAccordion from '@/components/services/ServiceAccordion'
+import { getServicesByCategory } from '@/lib/sanity/queries'
 
 export const metadata: Metadata = { title: 'Technical & Mapping Services' }
 
-const services = [
+export const revalidate = 3600
+
+const staticServices = [
   {
     title: 'Land & Lease Mapping',
     content: 'GIS-based mapping of leasehold positions, unit boundaries, and land grids. We produce high-quality maps suitable for landowner presentations, regulatory filings, and operations planning.',
@@ -18,7 +21,18 @@ const services = [
   },
 ]
 
-export default function TechnicalPage() {
+export default async function TechnicalPage() {
+  let services = staticServices
+
+  try {
+    const sanityServices = await getServicesByCategory('technical')
+    if (sanityServices.length > 0) {
+      services = sanityServices.map(({ title, content }) => ({ title, content }))
+    }
+  } catch {
+    // Sanity not configured yet — fall back to static content
+  }
+
   return (
     <div className="section-padding container-max">
       <h1 className="section-title">Technical & Mapping Services</h1>
