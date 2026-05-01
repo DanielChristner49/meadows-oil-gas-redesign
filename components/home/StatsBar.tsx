@@ -14,7 +14,7 @@ export default function StatsBar() {
           display: 'flex',
           justifyContent: 'space-around',
           alignItems: 'center',
-          padding: '0.625rem 1.5rem',
+          padding: '0.625rem 0.75rem',
         }}
       >
         {stats.map(({ figure, label }, i) => (
@@ -25,7 +25,7 @@ export default function StatsBar() {
                   width: '1px',
                   height: '2rem',
                   backgroundColor: 'rgba(0,0,0,0.12)',
-                  marginRight: '2rem',
+                  marginRight: 'clamp(0.5rem, 2vw, 2rem)',
                 }}
               />
             )}
@@ -33,11 +33,12 @@ export default function StatsBar() {
               <p
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+                  fontSize: 'clamp(1rem, 3.5vw, 2.5rem)',
                   fontWeight: 800,
                   color: '#000',
                   lineHeight: 1,
                   letterSpacing: '-0.02em',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 {figure}

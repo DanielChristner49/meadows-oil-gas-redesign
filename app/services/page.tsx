@@ -3,14 +3,14 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Services',
-  description: 'Comprehensive land services: Oil & Gas Leasing, Title Services, and AI Data Center Development. Serving Oklahoma, Kansas, Texas, and beyond since 2009.',
+  description: 'Comprehensive land services: Leasing & Acquisitions, Title Services, and AI Data Center Development. Serving Oklahoma, Kansas, Texas, and beyond since 2009.',
   alternates: { canonical: '/services' },
 }
 
 const services = [
   {
     number: '01',
-    title: 'Oil & Gas Leasing',
+    title: 'Leasing & Acquisitions',
     description:
       'Expert leasehold acquisition services helping operators and investors move quickly with clear ownership data and experienced execution. Our team specializes in ownership reporting, due diligence, and regulatory support.',
     href: '/contact',
