@@ -7,7 +7,7 @@ const stats = [
 
 export default function StatsBar() {
   return (
-    <section style={{ backgroundColor: '#c8921a' }}>
+    <section aria-label="Key Statistics" style={{ backgroundColor: '#c8921a' }}>
       <div
         className="container-max"
         style={{
