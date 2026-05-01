@@ -1,9 +1,6 @@
-import { render, screen } from '@testing-library/react'
 import StatsBar from '@/components/home/StatsBar'
 
 // Tests updated in Task 2 to match the new gold stats bar
 describe('StatsBar', () => {
-  it('placeholder — updated in Task 2', () => {
-    expect(true).toBe(true)
-  })
+  it.todo('renders gold stats bar with 2009 / 10+ / OK·KS·TX / 3 Core Services')
 })
