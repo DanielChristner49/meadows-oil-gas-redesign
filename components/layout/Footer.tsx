@@ -37,6 +37,7 @@ export default function Footer() {
               width={155}
               height={42}
               className="h-9 w-auto object-contain mb-5"
+              style={{ mixBlendMode: 'screen' }}
             />
             <p className="text-sm leading-relaxed max-w-xs" style={{ fontFamily: 'var(--font-sans)' }}>
               Comprehensive land services built for speed, accuracy, and reliability. Trusted
