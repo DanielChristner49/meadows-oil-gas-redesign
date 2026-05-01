@@ -1,39 +1,211 @@
+'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function HeroSection() {
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: 'var(--color-brand-navy)' }}
+      className="relative flex items-end overflow-hidden"
+      style={{ minHeight: 'calc(100dvh - 4.75rem)' }}
     >
-      {/* Overlay */}
-      <div className="absolute inset-0 hero-overlay" />
+      <Image
+        src="/images/hero.jpg"
+        alt="Meadows Oil and Gas operations"
+        fill
+        priority
+        className="object-cover object-center"
+        sizes="100vw"
+      />
 
-      <div className="relative z-10 container-max px-4 sm:px-6 lg:px-8 text-center text-white">
-        <p
-          className="uppercase tracking-widest text-sm font-semibold mb-4"
-          style={{ color: 'var(--color-brand-gold)' }}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(to right, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.75) 45%, rgba(0,0,0,0.2) 100%)',
+        }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)',
+        }}
+      />
+
+      {/* Scroll indicator */}
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5"
+        style={{ animation: 'scrollBounce 2.2s ease-in-out infinite' }}
+        aria-hidden="true"
+      >
+        <span
+          className="text-xs tracking-widest uppercase"
+          style={{ fontFamily: 'var(--font-display)', color: 'rgba(200,146,26,0.6)', fontSize: '0.55rem', letterSpacing: '0.2em' }}
         >
-          Oklahoma City · Bakersfield, CA
-        </p>
-        <h1
-          className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 max-w-4xl mx-auto"
-          style={{ fontFamily: 'var(--font-serif)' }}
-        >
-          Energy Expertise, From the Ground Up
-        </h1>
-        <p className="text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Meadows Oil and Gas delivers trusted land brokerage, mineral rights,
-          title services, and renewable energy solutions for domestic and
-          international projects.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/services" className="btn-primary text-base">
-            Our Services
-          </Link>
-          <Link href="/contact" className="btn-outline text-base">
-            Contact Us
-          </Link>
+          Scroll
+        </span>
+        <div
+          style={{
+            width: '1px',
+            height: '2rem',
+            background: 'linear-gradient(to bottom, rgba(200,146,26,0.6), transparent)',
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 w-full container-max px-6 sm:px-8 lg:px-10 pb-20 md:pb-28">
+        <div className="max-w-2xl">
+
+          <span
+            className="hero-animate inline-flex items-center gap-2 mb-6"
+            style={{
+              animationDelay: '0ms',
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.65rem',
+              fontWeight: 500,
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              color: 'var(--color-brand-gold)',
+              backgroundColor: 'rgba(200,146,26,0.12)',
+              border: '1px solid rgba(200,146,26,0.25)',
+              borderRadius: '9999px',
+              padding: '0.35rem 0.875rem',
+            }}
+          >
+            <span
+              style={{
+                width: '0.4rem',
+                height: '0.4rem',
+                borderRadius: '9999px',
+                backgroundColor: 'var(--color-brand-gold)',
+                display: 'inline-block',
+              }}
+            />
+            Data Center Development
+          </span>
+
+          <h1
+            className="text-white leading-none mb-4"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2.5rem, 7vw, 5.5rem)',
+              letterSpacing: '0.02em',
+              textTransform: 'uppercase',
+            }}
+          >
+            <span className="hero-animate block" style={{ animationDelay: '100ms' }}>
+              For Advanced
+            </span>
+            <span className="hero-animate block" style={{ animationDelay: '180ms' }}>
+              Computing &amp;
+            </span>
+            <span
+              className="hero-animate block"
+              style={{ animationDelay: '260ms', color: 'var(--color-brand-gold)' }}
+            >
+              AI Infrastructure
+            </span>
+          </h1>
+
+          <p
+            className="hero-animate text-white text-xl md:text-2xl mb-4"
+            style={{
+              animationDelay: '320ms',
+              fontFamily: 'var(--font-display)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+            }}
+          >
+            Turning Your Vision Into Reality
+          </p>
+
+          <p
+            className="hero-animate text-gray-300 text-base md:text-lg leading-relaxed mb-10 max-w-lg"
+            style={{
+              animationDelay: '400ms',
+              fontFamily: 'var(--font-sans)',
+              textTransform: 'none',
+              letterSpacing: 'normal',
+            }}
+          >
+            At Meadows Oil &amp; Gas, our mission is to set the standard for excellence in land
+            services by delivering precise, dependable land and title solutions that empower our
+            clients to move with confidence.
+          </p>
+
+          <div className="hero-animate flex flex-col sm:flex-row gap-4" style={{ animationDelay: '480ms' }}>
+            <Link
+              href="/services"
+              className="group inline-flex items-center justify-between gap-3"
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: '#000',
+                backgroundColor: 'var(--color-brand-gold)',
+                borderRadius: '9999px',
+                padding: '0.75rem 0.75rem 0.75rem 1.5rem',
+                transition: 'background-color 0.4s cubic-bezier(0.32,0.72,0,1), transform 0.4s cubic-bezier(0.32,0.72,0,1)',
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement
+                el.style.backgroundColor = 'var(--color-brand-gold-light)'
+                el.style.transform = 'translateY(-2px)'
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement
+                el.style.backgroundColor = 'var(--color-brand-gold)'
+                el.style.transform = 'translateY(0)'
+              }}
+            >
+              Our Services
+              <span
+                className="flex items-center justify-center shrink-0"
+                style={{
+                  width: '2rem',
+                  height: '2rem',
+                  borderRadius: '9999px',
+                  backgroundColor: 'rgba(0,0,0,0.18)',
+                  fontSize: '0.875rem',
+                  transition: 'transform 0.4s cubic-bezier(0.32,0.72,0,1)',
+                }}
+              >
+                →
+              </span>
+            </Link>
+
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-3"
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: 'white',
+                border: '1px solid rgba(255,255,255,0.28)',
+                borderRadius: '9999px',
+                padding: '0.75rem 1.75rem',
+                transition: 'border-color 0.4s cubic-bezier(0.32,0.72,0,1), color 0.4s cubic-bezier(0.32,0.72,0,1), transform 0.4s cubic-bezier(0.32,0.72,0,1)',
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement
+                el.style.borderColor = 'var(--color-brand-gold)'
+                el.style.color = 'var(--color-brand-gold)'
+                el.style.transform = 'translateY(-2px)'
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement
+                el.style.borderColor = 'rgba(255,255,255,0.28)'
+                el.style.color = 'white'
+                el.style.transform = 'translateY(0)'
+              }}
+            >
+              Contact Us
+            </Link>
+          </div>
         </div>
       </div>
     </section>

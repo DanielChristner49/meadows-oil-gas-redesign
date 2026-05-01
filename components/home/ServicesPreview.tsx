@@ -1,77 +1,217 @@
+'use client'
 import Link from 'next/link'
-import { FileText, Map, Wind } from 'lucide-react'
+import ScrollReveal from '@/components/ui/ScrollReveal'
 
 const services = [
   {
-    Icon: FileText,
-    title: 'Land Brokerage & Title',
+    number: '01',
+    title: 'Leasing & Acquisitions',
     description:
-      'Leasehold acquisitions, mineral ownership research, title opinions, curative work, and right-of-ways handled by certified professionals.',
-    href: '/services/brokerage',
-    isRenewable: false,
+      'Expert leasehold acquisition services helping operators and investors move quickly with clear ownership data and experienced execution.',
+    href: '/services',
+    accent: '#c8921a',
+    span: 'md:col-span-2',
+    large: true,
   },
   {
-    Icon: Map,
-    title: 'Technical & Mapping',
+    number: '02',
+    title: 'Title Services',
     description:
-      'Seismic mapping, GIS-based land mapping, and high-resolution digital imagery for exploration and production planning.',
-    href: '/services/technical',
-    isRenewable: false,
+      'Dependable title work including title opinions, curative work, and ownership reporting across Oklahoma, Kansas, Texas, and beyond.',
+    href: '/services',
+    accent: '#c8921a',
+    span: 'md:col-span-1',
+    large: false,
   },
   {
-    Icon: Wind,
-    title: 'Wind Leasing',
+    number: '03',
+    title: 'AI Data Center Development',
     description:
-      'Specialist renewable energy land acquisition, wind lease negotiation, and project facilitation for clean energy development.',
-    href: '/services/brokerage',
-    isRenewable: true,
+      'Land and title solutions for advanced computing and AI infrastructure development — turning your vision into reality.',
+    href: '/services',
+    accent: '#c8921a',
+    span: 'md:col-span-3',
+    large: false,
   },
 ]
+
+function ServiceCard({
+  number,
+  title,
+  description,
+  href,
+  accent,
+  large,
+  delay,
+}: (typeof services)[0] & { delay: number }) {
+  return (
+    <ScrollReveal delay={delay} className="h-full">
+      <Link
+        href={href}
+        className="group block h-full"
+        style={{
+          padding: '1px',
+          borderRadius: '1.25rem',
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%)',
+          transition: 'box-shadow 0.5s cubic-bezier(0.32,0.72,0,1)',
+        }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLElement).style.boxShadow = `0 0 0 1px ${accent}44`
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLElement).style.boxShadow = 'none'
+        }}
+      >
+        <div
+          className="h-full flex flex-col justify-between"
+          style={{
+            backgroundColor: 'rgba(20,20,20,0.85)',
+            borderRadius: 'calc(1.25rem - 1px)',
+            padding: large ? '2.5rem' : '2rem',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
+            minHeight: large ? '18rem' : '14rem',
+          }}
+        >
+          <div>
+            <div className="flex items-start justify-between mb-6">
+              <span
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: large ? '5rem' : '3.5rem',
+                  lineHeight: 1,
+                  color: 'rgba(255,255,255,0.06)',
+                  letterSpacing: '0.02em',
+                }}
+              >
+                {number}
+              </span>
+              <span
+                style={{
+                  width: '2.25rem',
+                  height: '2.25rem',
+                  borderRadius: '9999px',
+                  border: `1px solid ${accent}44`,
+                  color: accent,
+                  fontSize: '1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  transition: 'transform 0.5s cubic-bezier(0.32,0.72,0,1)',
+                }}
+              >
+                →
+              </span>
+            </div>
+
+            <h3
+              className="mb-3"
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: large ? '1.5rem' : '1.125rem',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase',
+                color: 'white',
+                lineHeight: 1.1,
+              }}
+            >
+              {title}
+            </h3>
+            <p
+              className="text-sm leading-relaxed"
+              style={{
+                color: 'rgba(156,163,175,1)',
+                fontFamily: 'var(--font-sans)',
+                textTransform: 'none',
+                letterSpacing: 'normal',
+                maxWidth: large ? '36rem' : '100%',
+              }}
+            >
+              {description}
+            </p>
+          </div>
+
+          <div className="mt-6 flex items-center gap-2">
+            <span
+              className="text-xs tracking-widest uppercase"
+              style={{ fontFamily: 'var(--font-display)', color: accent }}
+            >
+              Learn More
+            </span>
+            <span
+              style={{
+                color: accent,
+                fontSize: '0.875rem',
+                transition: 'transform 0.4s cubic-bezier(0.32,0.72,0,1)',
+              }}
+            >
+              →
+            </span>
+          </div>
+        </div>
+      </Link>
+    </ScrollReveal>
+  )
+}
 
 export default function ServicesPreview() {
   return (
     <section
       className="section-padding"
-      style={{ backgroundColor: 'var(--color-brand-cream)' }}
+      style={{ backgroundColor: '#000' }}
     >
-      <div className="container-max">
-        <div className="text-center mb-12">
-          <h2 className="section-title">What We Do</h2>
-          <p className="section-subtitle mx-auto">
-            Full-service energy land professionals covering traditional oil & gas
-            and the growing renewable energy sector.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map(({ Icon, title, description, href, isRenewable }) => (
-            <Link
-              key={title}
-              href={href}
-              className="group block rounded-lg bg-white p-8 shadow-sm hover:shadow-md transition-shadow"
+      <div className="container-max px-6 sm:px-8">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+          <ScrollReveal>
+            <span className="section-label">What We Do</span>
+            <h2
+              className="text-white leading-none"
               style={{
-                borderTop: `4px solid ${isRenewable ? 'var(--color-brand-green)' : 'var(--color-brand-gold)'}`,
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.02em',
               }}
             >
-              <Icon
-                size={32}
-                style={{ color: isRenewable ? 'var(--color-brand-green)' : 'var(--color-brand-gold)' }}
-              />
-              <h3
-                className="text-xl font-semibold mt-4 mb-2"
-                style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-brand-navy)' }}
-              >
-                {title}
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--color-brand-gray)' }}>
-                {description}
-              </p>
-              <span
-                className="mt-4 inline-block text-sm font-medium group-hover:underline"
-                style={{ color: isRenewable ? 'var(--color-brand-green)' : 'var(--color-brand-gold)' }}
-              >
-                Learn more →
-              </span>
+              Core Services
+            </h2>
+          </ScrollReveal>
+
+          <ScrollReveal delay={100}>
+            <Link
+              href="/services"
+              className="shrink-0 self-start md:self-auto inline-flex items-center gap-2 text-xs tracking-widest uppercase"
+              style={{
+                fontFamily: 'var(--font-display)',
+                color: 'white',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '9999px',
+                padding: '0.625rem 1.25rem',
+                transition: 'border-color 0.4s cubic-bezier(0.32,0.72,0,1), color 0.4s cubic-bezier(0.32,0.72,0,1)',
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement
+                el.style.borderColor = 'var(--color-brand-gold)'
+                el.style.color = 'var(--color-brand-gold)'
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement
+                el.style.borderColor = 'rgba(255,255,255,0.2)'
+                el.style.color = 'white'
+              }}
+            >
+              All Services →
             </Link>
+          </ScrollReveal>
+        </div>
+
+        {/* Bento grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {services.map((service, i) => (
+            <div key={service.title} className={`${service.span}`}>
+              <ServiceCard {...service} delay={i * 80} />
+            </div>
           ))}
         </div>
       </div>

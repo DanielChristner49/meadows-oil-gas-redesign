@@ -2,7 +2,7 @@ import { Wind } from 'lucide-react'
 
 export default function WindLeasingBanner() {
   return (
-    <div className="wind-accent rounded-r-lg p-6 my-8">
+    <div id="wind-leasing" className="wind-accent rounded-r-lg p-6 my-8">
       <div className="flex items-start gap-4">
         <Wind
           className="mt-1 shrink-0"
@@ -12,7 +12,7 @@ export default function WindLeasingBanner() {
         <div>
           <h3
             className="text-lg font-semibold mb-2"
-            style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-brand-green)' }}
+            style={{ fontFamily: 'var(--font-display)', color: 'var(--color-brand-green)', textTransform: 'uppercase', letterSpacing: '0.04em' }}
           >
             Renewable Energy — Wind Leasing
           </h3>
