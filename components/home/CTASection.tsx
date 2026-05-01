@@ -17,7 +17,7 @@ export default function CTASection() {
                 className="leading-none mb-2"
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+                  fontSize: 'clamp(3rem, 6vw, 5.5rem)',
                   color: 'white',
                   textTransform: 'uppercase',
                   letterSpacing: '0.02em',
@@ -32,7 +32,7 @@ export default function CTASection() {
                   fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
                   color: 'white',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
+                  letterSpacing: '0.2em',
                   fontWeight: 600,
                 }}
               >
@@ -41,7 +41,7 @@ export default function CTASection() {
             </div>
             <Link
               href="/contact"
-              className="shrink-0 inline-flex items-center gap-3 rounded-full"
+              className="shrink-0 rounded-full"
               style={{
                 backgroundColor: 'var(--color-brand-gold)',
                 color: '#000',
@@ -52,6 +52,8 @@ export default function CTASection() {
                 fontWeight: 600,
                 padding: '1rem 1.75rem',
                 transition: 'transform 0.4s cubic-bezier(0.32,0.72,0,1), box-shadow 0.4s cubic-bezier(0.32,0.72,0,1)',
+                display: 'inline-flex',
+                alignItems: 'center',
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLElement
@@ -75,6 +77,7 @@ export default function CTASection() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: '1rem',
+                  marginLeft: '0.5rem',
                 }}
               >
                 →

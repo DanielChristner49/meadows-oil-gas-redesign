@@ -49,7 +49,7 @@ export default function WhySection() {
                 style={{
                   backgroundColor: 'white',
                   borderTop: '3px solid var(--color-brand-gold)',
-                  boxShadow: '0 2px 16px rgba(0,0,0,0.05)',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
                 }}
               >
                 <h3
