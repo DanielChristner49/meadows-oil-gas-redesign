@@ -51,7 +51,7 @@ function ServiceCard({
         className="group block h-full"
         style={{
           padding: '1px',
-          borderRadius: '1.25rem',
+          borderRadius: '0.5rem',
           background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%)',
           transition: 'box-shadow 0.5s cubic-bezier(0.32,0.72,0,1)',
         }}
@@ -66,43 +66,49 @@ function ServiceCard({
           className="h-full flex flex-col justify-between"
           style={{
             backgroundColor: 'rgba(20,20,20,0.85)',
-            borderRadius: 'calc(1.25rem - 1px)',
+            borderRadius: 'calc(0.5rem - 1px)',
+            border: '1px solid rgba(200,146,26,0.18)',
             padding: large ? '2.5rem' : '2rem',
             boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
             minHeight: large ? '18rem' : '14rem',
+            position: 'relative',
+            overflow: 'hidden',
           }}
         >
+          <span
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: large ? '5rem' : '3.5rem',
+              lineHeight: 1,
+              color: 'rgba(255,255,255,0.05)',
+              letterSpacing: '0.02em',
+              position: 'absolute',
+              top: '0.75rem',
+              right: '1rem',
+              userSelect: 'none',
+            }}
+          >
+            {number}
+          </span>
           <div>
-            <div className="flex items-start justify-between mb-6">
-              <span
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: large ? '5rem' : '3.5rem',
-                  lineHeight: 1,
-                  color: 'rgba(255,255,255,0.06)',
-                  letterSpacing: '0.02em',
-                }}
-              >
-                {number}
-              </span>
-              <span
-                style={{
-                  width: '2.25rem',
-                  height: '2.25rem',
-                  borderRadius: '9999px',
-                  border: `1px solid ${accent}44`,
-                  color: accent,
-                  fontSize: '1rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                  transition: 'transform 0.5s cubic-bezier(0.32,0.72,0,1)',
-                }}
-              >
-                →
-              </span>
-            </div>
+            <span
+              style={{
+                width: '2.25rem',
+                height: '2.25rem',
+                borderRadius: '9999px',
+                border: `1px solid ${accent}44`,
+                color: accent,
+                fontSize: '1rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+                transition: 'transform 0.5s cubic-bezier(0.32,0.72,0,1)',
+                marginBottom: '1.5rem',
+              }}
+            >
+              →
+            </span>
 
             <h3
               className="mb-3"
