@@ -2,10 +2,14 @@ import { render, screen } from '@testing-library/react'
 import HeroSection from '@/components/home/HeroSection'
 
 describe('HeroSection', () => {
-  it('renders primary headline containing "Energy"', () => {
+  it('renders AI Infrastructure headline', () => {
     render(<HeroSection />)
-    const heading = screen.getByRole('heading', { level: 1 })
-    expect(heading).toHaveTextContent(/Energy/i)
+    expect(screen.getByText(/AI INFRASTRUCTURE/i)).toBeInTheDocument()
+  })
+
+  it('renders tagline', () => {
+    render(<HeroSection />)
+    expect(screen.getByText(/Turning Your Vision Into Reality/i)).toBeInTheDocument()
   })
 
   it('renders CTA link to /services', () => {
