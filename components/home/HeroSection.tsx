@@ -21,7 +21,7 @@ export default function HeroSection() {
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(to right, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.75) 45%, rgba(0,0,0,0.2) 100%)',
+            'linear-gradient(to right, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.75) 55%, rgba(0,0,0,0.1) 100%)',
         }}
       />
       <div
@@ -38,8 +38,13 @@ export default function HeroSection() {
         aria-hidden="true"
       >
         <span
-          className="text-xs tracking-widest uppercase"
-          style={{ fontFamily: 'var(--font-display)', color: 'rgba(200,146,26,0.6)', fontSize: '0.55rem', letterSpacing: '0.2em' }}
+          style={{
+            fontFamily: 'var(--font-display)',
+            color: 'rgba(200,146,26,0.6)',
+            fontSize: '0.55rem',
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+          }}
         >
           Scroll
         </span>
@@ -55,6 +60,7 @@ export default function HeroSection() {
       <div className="relative z-10 w-full container-max px-6 sm:px-8 lg:px-10 pb-20 md:pb-28">
         <div className="max-w-2xl">
 
+          {/* Badge — border only, no fill */}
           <span
             className="hero-animate inline-flex items-center gap-2 mb-6"
             style={{
@@ -65,8 +71,7 @@ export default function HeroSection() {
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
               color: 'var(--color-brand-gold)',
-              backgroundColor: 'rgba(200,146,26,0.12)',
-              border: '1px solid rgba(200,146,26,0.25)',
+              border: '1px solid rgba(200,146,26,0.35)',
               borderRadius: '9999px',
               padding: '0.35rem 0.875rem',
             }}
@@ -83,13 +88,15 @@ export default function HeroSection() {
             Data Center Development
           </span>
 
+          {/* Heading — larger, tighter tracking */}
           <h1
             className="text-white leading-none mb-4"
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2.5rem, 7vw, 5.5rem)',
-              letterSpacing: '0.02em',
+              fontSize: 'clamp(2.75rem, 8vw, 6.5rem)',
+              letterSpacing: '-0.02em',
               textTransform: 'uppercase',
+              fontWeight: 800,
             }}
           >
             <span className="hero-animate block" style={{ animationDelay: '100ms' }}>
@@ -106,18 +113,23 @@ export default function HeroSection() {
             </span>
           </h1>
 
+          {/* Tagline — brighter, wider spacing */}
           <p
-            className="hero-animate text-white text-xl md:text-2xl mb-4"
+            className="hero-animate mb-4"
             style={{
               animationDelay: '320ms',
               fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
               textTransform: 'uppercase',
-              letterSpacing: '0.05em',
+              letterSpacing: '0.18em',
+              color: 'rgba(255,255,255,0.85)',
+              fontWeight: 500,
             }}
           >
             Turning Your Vision Into Reality
           </p>
 
+          {/* Body copy — one sentence */}
           <p
             className="hero-animate text-gray-300 text-base md:text-lg leading-relaxed mb-10 max-w-lg"
             style={{
@@ -127,12 +139,12 @@ export default function HeroSection() {
               letterSpacing: 'normal',
             }}
           >
-            At Meadows Oil &amp; Gas, our mission is to set the standard for excellence in land
-            services by delivering precise, dependable land and title solutions that empower our
-            clients to move with confidence.
+            Precise, dependable land and title solutions that empower our clients to move
+            with confidence.
           </p>
 
           <div className="hero-animate flex flex-col sm:flex-row gap-4" style={{ animationDelay: '480ms' }}>
+            {/* Primary CTA — taller, inner arrow */}
             <Link
               href="/services"
               className="group inline-flex items-center justify-between gap-3"
@@ -145,7 +157,7 @@ export default function HeroSection() {
                 color: '#000',
                 backgroundColor: 'var(--color-brand-gold)',
                 borderRadius: '9999px',
-                padding: '0.75rem 0.75rem 0.75rem 1.5rem',
+                padding: '0.875rem 0.875rem 0.875rem 1.5rem',
                 transition: 'background-color 0.4s cubic-bezier(0.32,0.72,0,1), transform 0.4s cubic-bezier(0.32,0.72,0,1)',
               }}
               onMouseEnter={(e) => {
@@ -168,13 +180,13 @@ export default function HeroSection() {
                   borderRadius: '9999px',
                   backgroundColor: 'rgba(0,0,0,0.18)',
                   fontSize: '0.875rem',
-                  transition: 'transform 0.4s cubic-bezier(0.32,0.72,0,1)',
                 }}
               >
                 →
               </span>
             </Link>
 
+            {/* Secondary CTA — higher border opacity */}
             <Link
               href="/contact"
               className="inline-flex items-center justify-center gap-3"
@@ -185,9 +197,9 @@ export default function HeroSection() {
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
                 color: 'white',
-                border: '1px solid rgba(255,255,255,0.28)',
+                border: '1px solid rgba(255,255,255,0.35)',
                 borderRadius: '9999px',
-                padding: '0.75rem 1.75rem',
+                padding: '0.875rem 1.75rem',
                 transition: 'border-color 0.4s cubic-bezier(0.32,0.72,0,1), color 0.4s cubic-bezier(0.32,0.72,0,1), transform 0.4s cubic-bezier(0.32,0.72,0,1)',
               }}
               onMouseEnter={(e) => {
@@ -198,7 +210,7 @@ export default function HeroSection() {
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLElement
-                el.style.borderColor = 'rgba(255,255,255,0.28)'
+                el.style.borderColor = 'rgba(255,255,255,0.35)'
                 el.style.color = 'white'
                 el.style.transform = 'translateY(0)'
               }}
