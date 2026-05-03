@@ -8,12 +8,19 @@ import LinkedInStrip from '@/components/home/LinkedInStrip'
 import CTASection from '@/components/home/CTASection'
 import ProcessSection from '@/components/home/ProcessSection'
 import ClientTypesSection from '@/components/home/ClientTypesSection'
+import { sanityClient } from '@/lib/sanity/client'
+import { testimonialsQuery } from '@/lib/sanity/queries'
+import type { SanityTestimonial } from '@/lib/sanity/types'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const testimonials = await sanityClient
+    .fetch<SanityTestimonial[]>(testimonialsQuery)
+    .catch(() => [] as SanityTestimonial[])
+
   return (
     <>
       <HeroSection />
@@ -22,7 +29,7 @@ export default function HomePage() {
       <ServicesPreview />
       <ClientTypesSection />
       <ProcessSection />
-      <TestimonialsSection />
+      <TestimonialsSection testimonials={testimonials} />
       <LinkedInStrip />
       <CTASection />
     </>
