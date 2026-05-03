@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { breadcrumbSchema } from '@/lib/seo'
+import { sanityClient } from '@/lib/sanity/client'
+import { faqQuery } from '@/lib/sanity/queries'
+import type { SanityFaqItem } from '@/lib/sanity/types'
 
 const breadcrumb = breadcrumbSchema([
   { name: 'Home', path: '/' },
@@ -22,132 +25,37 @@ export const metadata: Metadata = {
 type QA = { q: string; a: string }
 type Section = { id: string; label: string; items: QA[] }
 
-const sections: Section[] = [
-  {
-    id: 'scope',
-    label: 'Project Scope',
-    items: [
-      {
-        q: 'Is there a minimum project size?',
-        a: 'No. We work on single-tract title opinions, targeted leasing campaigns, individual ROW parcels, and large-scale multi-county acquisitions. If the work is in our wheelhouse and we can do it right, we\'ll take it on. Describe your project and we\'ll tell you honestly if it\'s a fit.',
-      },
-      {
-        q: 'Do you work with independent operators or only large companies?',
-        a: 'Both. We work with independents, private equity-backed operators, large E&P companies, pipeline companies, wind developers, and individual mineral rights investors. The common thread is that our clients need accurate, fast land services — not a headcount discussion.',
-      },
-      {
-        q: 'Can you handle a large-scale leasing campaign on short notice?',
-        a: 'Often yes. Our network of career landmen allows us to scale quickly for active leasing campaigns. Contact us immediately when you have a tight window — the earlier we know about a deadline, the better we can staff for it. We\'ll tell you upfront if we can meet your timeline.',
-      },
-      {
-        q: 'Do you handle due diligence for acquisitions?',
-        a: 'Yes. We support M&A and acquisition due diligence with ownership verification, lease review, title examination, encumbrance identification, and acreage reporting. We work to your deadline and your format requirements.',
-      },
-      {
-        q: 'Can you work alongside our in-house land department?',
-        a: 'Absolutely. Many clients use us to supplement their in-house team — we handle overflow, cover counties where you don\'t have courthouse relationships, or run parallel leasing efforts on aggressive acquisition timelines. We integrate into your workflow, not the other way around.',
-      },
-    ],
-  },
-  {
-    id: 'timelines',
-    label: 'Timelines & Delivery',
-    items: [
-      {
-        q: 'How quickly can you start a new project?',
-        a: 'We typically respond to new project inquiries the same business day and can begin work within 24–48 hours of scope approval. For emergency or drilling-window situations, contact us by phone — we prioritize active needs.',
-      },
-      {
-        q: 'How long does a title opinion take?',
-        a: 'A single-tract title opinion typically takes 2–5 business days from scope approval, depending on courthouse accessibility and chain complexity. Multi-tract unit opinions run 5–15 business days. Complex chains with heirship or curative issues take longer — we\'ll tell you upfront if something is going to require more time.',
-      },
-      {
-        q: 'Can you deliver on a rush timeline?',
-        a: 'Yes, in many cases. Rush work depends on current project load and courthouse access. Call us when you have a hard deadline — we\'ll tell you immediately whether we can commit to it. We don\'t overpromise.',
-      },
-      {
-        q: 'What format do you deliver work in?',
-        a: 'We deliver in whatever format your team needs — written title opinions (attorney-certified or certified landman), Excel ownership runs, recorded lease originals, executed ROW agreements, or GIS/shapefile deliverables. If your title attorney or engineering team has specific requirements, tell us upfront and we\'ll match them.',
-      },
-      {
-        q: 'What happens after delivery if we find issues?',
-        a: 'We stand behind our work. If issues arise from our research, we address them. We\'re also available for follow-on curative work, supplemental research, division order support, and any questions that come up during drilling or production.',
-      },
-    ],
-  },
-  {
-    id: 'coverage',
-    label: 'Geographic Coverage',
-    items: [
-      {
-        q: 'What states do you cover?',
-        a: 'Our primary coverage is Oklahoma, Kansas, and Texas. We also work extensively in Colorado, New Mexico, North Dakota, Wyoming, Montana, and other central and southern US states. For areas outside our primary footprint, we leverage our network of vetted associate landmen. Contact us with your specific county or state and we\'ll confirm coverage.',
-      },
-      {
-        q: 'Do you have courthouse relationships in rural counties?',
-        a: 'Yes — this is a meaningful differentiator. Our landmen have built courthouse relationships across Oklahoma, Kansas, and Texas over years of active work. In rural counties with limited digital records and slow turnaround times, those relationships matter. If we have worked your target county before, we\'ll tell you.',
-      },
-      {
-        q: 'Can you handle multi-state projects?',
-        a: 'Yes. For operators with leasing campaigns or ROW projects spanning multiple states, we can coordinate a unified team with consistent reporting standards. We\'ve managed projects across 3–5 states simultaneously.',
-      },
-    ],
-  },
-  {
-    id: 'credentials',
-    label: 'Team & Credentials',
-    items: [
-      {
-        q: 'Are your landmen AAPL members?',
-        a: 'Yes. Meadows Oil & Gas holds active AAPL (American Association of Professional Landmen) membership, and our landmen adhere to the AAPL Code of Ethics. We are also active OCAPL (Oklahoma City Association of Professional Landmen) members. Membership means our team operates under a recognized professional framework — not just market incentives.',
-      },
-      {
-        q: 'How much experience do your landmen have?',
-        a: 'Our career landmen each bring 10+ years of hands-on experience in courthouse research, title opinion writing, leasehold acquisitions, right-of-way negotiation, and ownership reporting. We do not use junior staff on complex work without senior oversight.',
-      },
-      {
-        q: 'Are your title opinions attorney-certified?',
-        a: 'We can deliver both attorney-certified title opinions (prepared by or under the direct supervision of a licensed attorney) and certified landman opinions, depending on your requirements and the jurisdiction. Specify what your drilling program requires and we\'ll match it.',
-      },
-      {
-        q: 'Who will I be working with — a sales rep or a landman?',
-        a: 'You\'ll work directly with a career landman, not a sales team. When you contact us, you\'re talking to the people who will actually do the work — or who directly manage those who do. We don\'t layer in account managers between you and the expertise you\'re paying for.',
-      },
-    ],
-  },
-  {
-    id: 'billing',
-    label: 'Billing & Process',
-    items: [
-      {
-        q: 'How do you bill for services?',
-        a: 'Billing varies by project type. Title work is typically billed per tract or per opinion at a flat rate. Leasing campaigns and ROW projects are often billed on a daily rate basis plus expenses. GIS and mapping work is typically quoted as a fixed project fee. We provide a clear fee structure before work begins — no surprise invoices.',
-      },
-      {
-        q: 'Do you require a contract or retainer?',
-        a: 'For most engagements, we use a simple scope-of-work agreement that defines deliverables, timeline, and compensation before work begins. For ongoing relationships with recurring project volume, we can structure a master service agreement. We don\'t require a retainer for single-project engagements.',
-      },
-      {
-        q: 'What information do I need to provide to get a quote?',
-        a: 'The more detail you can share, the more accurate our quote will be. Helpful inputs: project type (title, leasing, ROW, wind, GIS), target county and state, acreage or tract count, any known complications (heirship, unleased interests, curative backlog), and your timeline or deadline. A 20-minute conversation is usually enough to produce a firm scope and fee estimate.',
-      },
-    ],
-  },
-]
+export default async function FAQPage() {
+  const faqItems = await sanityClient.fetch<SanityFaqItem[]>(faqQuery).catch(() => [])
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: sections.flatMap((s) =>
-    s.items.map(({ q, a }) => ({
-      '@type': 'Question',
-      name: q,
-      acceptedAnswer: { '@type': 'Answer', text: a },
-    }))
-  ),
-}
+  const sectionOrder = ['scope', 'title', 'leasing', 'wind', 'logistics'] as const
+  const sectionLabels: Record<string, string> = {
+    scope: 'Project Scope',
+    title: 'Title Services',
+    leasing: 'Leasing',
+    wind: 'Wind & Renewables',
+    logistics: 'Logistics & Process',
+  }
+  const sections: Section[] = sectionOrder.map((id) => ({
+    id,
+    label: sectionLabels[id],
+    items: faqItems
+      .filter((item) => item.category === id)
+      .map((item) => ({ q: item.question, a: item.answer })),
+  })).filter((s) => s.items.length > 0)
 
-export default function FAQPage() {
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: sections.flatMap((s) =>
+      s.items.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      }))
+    ),
+  }
+
   const totalQuestions = sections.reduce((sum, s) => sum + s.items.length, 0)
 
   return (

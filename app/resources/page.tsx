@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { breadcrumbSchema } from '@/lib/seo'
+import { sanityClient } from '@/lib/sanity/client'
+import { glossaryQuery } from '@/lib/sanity/queries'
+import type { SanityGlossaryTerm } from '@/lib/sanity/types'
 
 const breadcrumb = breadcrumbSchema([
   { name: 'Home', path: '/' },
@@ -39,148 +42,22 @@ type Category = {
   terms: Term[]
 }
 
-const categories: Category[] = [
-  {
-    id: 'title',
-    label: 'Title & Ownership',
-    terms: [
-      {
-        term: 'Title Opinion',
-        definition:
-          'A written legal opinion prepared by an attorney or experienced landman that describes the ownership of mineral rights in a specific tract of land based on a review of public records and courthouse documents. Operators require title opinions before drilling to confirm they are leasing from and paying royalties to the correct parties.',
-        relatedService: { label: 'Title Services', href: '/services/brokerage#title' },
-      },
-      {
-        term: 'Chain of Title',
-        definition:
-          'The documented history of all ownership transfers (deeds, probate, conveyances) for a tract of land from the earliest record to the present owner. A complete, unbroken chain of title is required before a lease can be signed or a well can be permitted.',
-      },
-      {
-        term: 'Title Curative',
-        definition:
-          'The process of identifying and correcting defects, gaps, or ambiguities in a chain of title. Common curative work includes resolving heirship issues, correcting erroneous legal descriptions, filing affidavits, obtaining ratifications, or addressing unleased interest holders.',
-        relatedService: { label: 'Title Services', href: '/services/brokerage#title' },
-      },
-      {
-        term: 'Mineral Rights',
-        definition:
-          'The ownership interest in the subsurface resources beneath a tract of land, including oil, gas, coal, and other minerals. Mineral rights can be severed from surface ownership and sold, leased, or inherited separately.',
-      },
-      {
-        term: 'Non-Participating Royalty Interest (NPRI)',
-        definition:
-          'A fractional interest in gross production from a tract of land, free of production costs, that does not participate in the executive rights (the right to lease the minerals). NPRI holders receive royalty payments but have no say in leasing decisions. Identifying NPRI burdens is critical during title work.',
-      },
-      {
-        term: 'Executive Rights',
-        definition:
-          'The right to execute (sign) an oil and gas lease on behalf of the mineral estate. The executive rights holder can lease the minerals even if they do not own all royalty interests. Operators must identify who holds executive rights before executing a lease.',
-      },
-      {
-        term: 'Division Order',
-        definition:
-          'A document sent to all interest owners before production revenue is distributed, setting forth each party\'s decimal interest in production. Division orders are prepared after title has been examined and must be accurate to avoid overpayment or underpayment to interest owners.',
-      },
-      {
-        term: 'Ownership Run',
-        definition:
-          'A report prepared by a landman that identifies all current mineral and/or surface owners in a specified area, along with their fractional interests. Ownership runs are used in both leasing campaigns and due diligence reviews.',
-        relatedService: { label: 'Leasing & Acquisitions', href: '/services/brokerage#leasing' },
-      },
-    ],
-  },
-  {
-    id: 'leasing',
-    label: 'Leasing & Acquisitions',
-    terms: [
-      {
-        term: 'Oil and Gas Lease',
-        definition:
-          'A legal agreement between a mineral owner (lessor) and an operator or company (lessee) granting the lessee the right to explore for and produce oil and gas from the lessor\'s property in exchange for a bonus payment and royalty on production. Key lease terms include royalty rate, primary term, held-by-production clause, and shut-in provisions.',
-      },
-      {
-        term: 'Leasehold Acquisition',
-        definition:
-          'The process of securing oil and gas leases from mineral owners in a target area. This involves identifying mineral owners, negotiating lease terms, executing leases, and recording them in the county courthouse. Speed and accuracy are critical — operators need leases in place before competitors or before a drilling window closes.',
-        relatedService: { label: 'Leasing & Acquisitions', href: '/services/brokerage#leasing' },
-      },
-      {
-        term: 'Bonus Payment',
-        definition:
-          'The upfront cash payment made by the lessee (operator) to the lessor (mineral owner) in exchange for signing an oil and gas lease. Bonus is typically expressed as dollars per net mineral acre and is negotiated based on market conditions and acreage quality.',
-      },
-      {
-        term: 'Royalty Interest',
-        definition:
-          'The percentage of gross production (or the value thereof) reserved for the mineral owner in an oil and gas lease, free of production costs. A standard royalty might be 1/8 (12.5%) or higher depending on negotiation. The royalty owner receives this share whether or not the well is profitable.',
-      },
-      {
-        term: 'Due Diligence',
-        definition:
-          'A thorough investigation of the mineral and title rights associated with a property before a transaction closes. For acquisitions, due diligence includes ownership verification, lease review, encumbrance identification, and regulatory compliance checks.',
-        relatedService: { label: 'Leasing & Acquisitions', href: '/services/brokerage#leasing' },
-      },
-    ],
-  },
-  {
-    id: 'row',
-    label: 'Right-of-Way & Surface Use',
-    terms: [
-      {
-        term: 'Right-of-Way (ROW)',
-        definition:
-          'A legal authorization granted by a landowner (or public authority) allowing a company to use a strip of land for a specific purpose — typically a pipeline, power line, road, or other infrastructure corridor. ROW agreements specify the width of the corridor, permitted uses, compensation, and restoration requirements.',
-        relatedService: { label: 'Right-of-Way', href: '/services/brokerage#row' },
-      },
-      {
-        term: 'Easement',
-        definition:
-          'A legal right to use another party\'s land for a specific, limited purpose without owning it. In oil and gas, easements commonly cover pipeline routes, access roads, and facility sites. Unlike a lease, an easement grants a specific use right rather than the right to produce resources.',
-      },
-      {
-        term: 'Surface Use Agreement',
-        definition:
-          'A contract between an operator and a surface owner that defines how the operator may use the surface of the land during exploration and production activities. This includes the location of well pads, access roads, tanks, pipelines, and reclamation obligations. Separate from any mineral lease.',
-        relatedService: { label: 'Right-of-Way', href: '/services/brokerage#row' },
-      },
-      {
-        term: 'Pooling / Forced Pooling',
-        definition:
-          'The combination of small tracts or interests into a single unit for the purpose of drilling a well. Voluntary pooling occurs by agreement; forced pooling (compulsory integration) is a regulatory process allowing operators to include non-consenting or unable-to-be-located mineral owners in a drilling unit, with specific compensation rules.',
-      },
-    ],
-  },
-  {
-    id: 'wind',
-    label: 'Wind & Renewable Energy',
-    terms: [
-      {
-        term: 'Wind Lease',
-        definition:
-          'A legal agreement between a landowner and a wind energy developer granting the developer the right to construct, operate, and maintain wind turbines and associated infrastructure on the landowner\'s property in exchange for annual rent payments and/or royalties based on electricity production. Wind leases typically run 30–50 years.',
-        relatedService: { label: 'Wind Leasing', href: '/services/wind' },
-      },
-      {
-        term: 'Acreage Aggregation',
-        definition:
-          'The process of assembling multiple landowner parcels into a contiguous block sufficient for a wind energy project. Developers and their land agents contact individual landowners, negotiate lease terms, and compile enough acreage to meet the minimum footprint requirements for a viable wind farm.',
-        relatedService: { label: 'Wind Leasing', href: '/services/wind' },
-      },
-      {
-        term: 'Turbine Setback',
-        definition:
-          'The minimum distance required between a wind turbine and a property boundary, road, residence, or other structure. Setback requirements vary by county and state regulation and directly affect the number of turbines that can be placed on a parcel.',
-      },
-      {
-        term: 'Interconnection Agreement',
-        definition:
-          'A contract between a wind project developer and a utility or grid operator specifying the terms under which the wind project will connect to and deliver electricity to the transmission grid. Interconnection queue position and agreement terms significantly affect project economics.',
-      },
-    ],
-  },
-]
+export default async function ResourcesPage() {
+  const sanityTerms = await sanityClient.fetch<SanityGlossaryTerm[]>(glossaryQuery).catch(() => [])
 
-export default function ResourcesPage() {
+  const categoryOrder = ['title', 'leasing', 'operations', 'wind'] as const
+  const categoryLabels: Record<string, string> = {
+    title: 'Title & Ownership',
+    leasing: 'Leasing',
+    operations: 'Operations',
+    wind: 'Wind & Renewables',
+  }
+  const categories: Category[] = categoryOrder.map((id) => ({
+    id,
+    label: categoryLabels[id],
+    terms: sanityTerms.filter((t) => t.category === id).map((t) => ({ term: t.term, definition: t.definition })),
+  })).filter((c) => c.terms.length > 0)
+
   const allTermCount = categories.reduce((sum, c) => sum + c.terms.length, 0)
 
   return (
