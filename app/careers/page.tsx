@@ -1,8 +1,17 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { CheckCircle } from 'lucide-react'
+import { sanityClient } from '@/lib/sanity/client'
+import { jobPostingsQuery } from '@/lib/sanity/queries'
+import type { SanityJobPosting } from '@/lib/sanity/types'
 
 const BASE_URL = 'https://meadows-oil-gas-redesign.vercel.app'
+
+const typeLabel: Record<SanityJobPosting['employmentType'], string> = {
+  CONTRACT: 'Contract',
+  FULL_TIME: 'Full Time',
+  PART_TIME: 'Part Time',
+}
 
 const jobPostingSchema = (title: string, description: string, employmentType: string) => ({
   '@context': 'https://schema.org',
@@ -51,38 +60,16 @@ const traits = [
   'Self-directed and reliable — we work lean and trust our team to deliver.',
 ]
 
-const positions = [
-  {
-    title: 'Contract Landman',
-    type: 'Contract · Remote & Field',
-    description:
-      'We engage experienced contract landmen for title opinions, ownership research, leasehold acquisitions, and field work across Oklahoma, Kansas, Texas, and extended service states. Project-based work with repeat engagement for strong performers.',
-    requirements: [
-      'Oklahoma, Kansas, or Texas courthouse experience',
-      'Title opinion writing and curative experience',
-      'AAPL membership preferred',
-      'Oil & gas leasing or mineral acquisition background',
-    ],
-  },
-  {
-    title: 'GIS & Mapping Specialist',
-    type: 'Contract or Full-Time · Remote-Friendly',
-    description:
-      'Support our technical services team with land mapping, parcel data assembly, and digital imagery analysis. Work with operators and landmen to produce accurate GIS documentation for project areas across the central United States.',
-    requirements: [
-      'ArcGIS, QGIS, or equivalent GIS platform experience',
-      'Land and parcel mapping background',
-      'Experience with county assessor and cadastral data',
-      'Oil & gas or right-of-way industry context preferred',
-    ],
-  },
-]
+export default async function CareersPage() {
+  const jobs = await sanityClient.fetch<SanityJobPosting[]>(jobPostingsQuery).catch(() => [])
 
-export default function CareersPage() {
   return (
     <div>
-      <script type="application/ld+json">{JSON.stringify(jobPostingSchema('Contract Landman','We engage experienced contract landmen for title opinions, ownership research, leasehold acquisitions, and field work across Oklahoma, Kansas, Texas, and extended service states. Project-based work with repeat engagement for strong performers.','CONTRACTOR')).replace(/&/g, '\\u0026')}</script>
-      <script type="application/ld+json">{JSON.stringify(jobPostingSchema('GIS & Mapping Specialist','Support our technical services team with land mapping, parcel data assembly, and digital imagery analysis. Work with operators and landmen to produce accurate GIS documentation for project areas across the central United States.','CONTRACTOR')).replace(/&/g, '\\u0026')}</script>
+      {jobs.map((job) => (
+        <script key={job._id} type="application/ld+json">
+          {JSON.stringify(jobPostingSchema(job.title, job.description ?? '', job.employmentType)).replace(/&/g, '\\u0026')}
+        </script>
+      ))}
       {/* Header */}
       <div
         className="section-padding"
@@ -168,9 +155,9 @@ export default function CareersPage() {
                 Current Openings
               </h2>
               <div className="space-y-6">
-                {positions.map(({ title, type, description, requirements }) => (
+                {jobs.map((job) => (
                   <div
-                    key={title}
+                    key={job._id}
                     className="p-8"
                     style={{
                       backgroundColor: 'white',
@@ -188,7 +175,7 @@ export default function CareersPage() {
                           letterSpacing: '0.05em',
                         }}
                       >
-                        {title}
+                        {job.title}
                       </h3>
                       <span
                         style={{
@@ -203,31 +190,35 @@ export default function CareersPage() {
                           alignSelf: 'flex-start',
                         }}
                       >
-                        {type}
+                        {typeLabel[job.employmentType]}
                       </span>
                     </div>
-                    <p
-                      className="text-sm leading-relaxed mb-5"
-                      style={{
-                        color: 'var(--color-brand-gray)',
-                        fontFamily: 'var(--font-sans)',
-                        textTransform: 'none',
-                        letterSpacing: 'normal',
-                      }}
-                    >
-                      {description}
-                    </p>
-                    <ul className="space-y-2">
-                      {requirements.map((req) => (
-                        <li key={req} className="flex gap-2 text-sm" style={{ color: 'var(--color-brand-gray)', fontFamily: 'var(--font-sans)' }}>
-                          <span style={{ color: 'var(--color-brand-gold)', flexShrink: 0 }}>—</span>
-                          <span style={{ textTransform: 'none', letterSpacing: 'normal' }}>{req}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {job.description && (
+                      <p
+                        className="text-sm leading-relaxed mb-5"
+                        style={{
+                          color: 'var(--color-brand-gray)',
+                          fontFamily: 'var(--font-sans)',
+                          textTransform: 'none',
+                          letterSpacing: 'normal',
+                        }}
+                      >
+                        {job.description}
+                      </p>
+                    )}
+                    {job.requirements && job.requirements.length > 0 && (
+                      <ul className="space-y-2">
+                        {job.requirements.map((req) => (
+                          <li key={req} className="flex gap-2 text-sm" style={{ color: 'var(--color-brand-gray)', fontFamily: 'var(--font-sans)' }}>
+                            <span style={{ color: 'var(--color-brand-gold)', flexShrink: 0 }}>—</span>
+                            <span style={{ textTransform: 'none', letterSpacing: 'normal' }}>{req}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     <div className="mt-6 pt-5" style={{ borderTop: '1px solid rgba(0,0,0,0.07)' }}>
                       <a
-                        href={`mailto:info@meadowsoilandgas.com?subject=${encodeURIComponent(`Application: ${title}`)}`}
+                        href={`mailto:info@meadowsoilandgas.com?subject=${encodeURIComponent(`Application: ${job.title}`)}`}
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
