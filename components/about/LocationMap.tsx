@@ -17,7 +17,7 @@ function MapFallback() {
           <circle cx="12" cy="10" r="3"/>
         </svg>
         <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-          Map — Oklahoma City · Bakersfield · 22 project counties
+          Map — Oklahoma City · 22 project counties
         </p>
       </div>
     </div>
