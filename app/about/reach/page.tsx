@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ServiceAreaMap from '@/components/about/ServiceAreaMap'
-import LocationMap from '@/components/about/LocationMap'
+import MapReveal from '@/components/about/MapReveal'
 import { breadcrumbSchema } from '@/lib/seo'
 
 const breadcrumb = breadcrumbSchema([
@@ -238,7 +238,7 @@ export default function ReachPage() {
               across the Mid-Continent basin and southern plains.
             </p>
           </div>
-          <LocationMap />
+          <MapReveal />
         </div>
       </div>
 
