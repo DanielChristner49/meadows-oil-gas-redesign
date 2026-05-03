@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import HeroParallax from '@/components/home/HeroParallax'
+import HeroPinned from '@/components/scroll/HeroPinned'
 import { motion, useReducedMotion, type Variants } from 'framer-motion'
 
 export default function HeroSection() {
@@ -17,19 +17,20 @@ export default function HeroSection() {
   }
 
   return (
-    <HeroParallax
-      imageSrc="/images/hero.jpg"
+    <HeroPinned
+      bgSrc="/images/hero.jpg"
+      pinDuration="+=200%"
       className="flex items-end"
       style={{ minHeight: 'calc(100dvh - 4.75rem)' }}
     >
       {/* Gradient overlays */}
       <div
         className="absolute inset-0 z-[1]"
-        style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.75) 55%, rgba(0,0,0,0.1) 100%)' }}
+        style={{ background: 'linear-gradient(to right, rgba(5,5,5,0.97) 0%, rgba(5,5,5,0.75) 55%, rgba(5,5,5,0.1) 100%)' }}
       />
       <div
         className="absolute inset-0 z-[1]"
-        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)' }}
+        style={{ background: 'linear-gradient(to top, rgba(5,5,5,0.75) 0%, transparent 50%)' }}
       />
 
       {/* Scroll indicator */}
@@ -46,8 +47,6 @@ export default function HeroSection() {
 
       <div className="relative z-10 w-full container-max px-6 sm:px-8 lg:px-10 pb-20 md:pb-28">
         <motion.div className="max-w-2xl" variants={container} initial="hidden" animate="visible">
-
-          {/* Badge */}
           <motion.span
             variants={item}
             className="inline-flex items-center gap-2 mb-6"
@@ -67,7 +66,6 @@ export default function HeroSection() {
             Oklahoma Land Services
           </motion.span>
 
-          {/* Heading */}
           <h1
             className="text-white leading-none mb-4"
             style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.75rem, 8vw, 6.5rem)', letterSpacing: '-0.02em', textTransform: 'uppercase', fontWeight: 800 }}
@@ -77,7 +75,6 @@ export default function HeroSection() {
             <motion.span variants={item} className="block" style={{ color: 'var(--color-brand-gold)' }}>Title Services</motion.span>
           </h1>
 
-          {/* Tagline */}
           <motion.p
             variants={item}
             className="mb-4"
@@ -86,7 +83,6 @@ export default function HeroSection() {
             Serving Operators Since 2009
           </motion.p>
 
-          {/* Body copy */}
           <motion.p
             variants={item}
             className="text-gray-300 text-base md:text-lg leading-relaxed mb-10 max-w-lg"
@@ -95,45 +91,30 @@ export default function HeroSection() {
             Precise, dependable land and title solutions that empower our clients to move with confidence.
           </motion.p>
 
-          {/* CTAs */}
           <motion.div variants={item} className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/services"
               className="group inline-flex items-center justify-between gap-3"
               style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: '0.75rem',
-                fontWeight: 600,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: '#000',
-                backgroundColor: 'var(--color-brand-gold)',
-                borderRadius: '9999px',
-                padding: '0.875rem 0.875rem 0.875rem 1.5rem',
+                fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.12em',
+                textTransform: 'uppercase', color: '#000', backgroundColor: 'var(--color-brand-gold)',
+                borderRadius: '9999px', padding: '0.875rem 0.875rem 0.875rem 1.5rem',
                 transition: 'background-color 0.4s cubic-bezier(0.32,0.72,0,1), transform 0.4s cubic-bezier(0.32,0.72,0,1)',
               }}
               onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = 'var(--color-brand-gold-light)'; el.style.transform = 'translateY(-2px)' }}
               onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = 'var(--color-brand-gold)'; el.style.transform = 'translateY(0)' }}
             >
               Our Services
-              <span className="flex items-center justify-center shrink-0" style={{ width: '2rem', height: '2rem', borderRadius: '9999px', backgroundColor: 'rgba(0,0,0,0.18)', fontSize: '0.875rem' }}>
-                →
-              </span>
+              <span className="flex items-center justify-center shrink-0" style={{ width: '2rem', height: '2rem', borderRadius: '9999px', backgroundColor: 'rgba(0,0,0,0.18)', fontSize: '0.875rem' }}>→</span>
             </Link>
             <Link
               href="/contact"
               className="inline-flex items-center justify-center gap-3"
               style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: '0.75rem',
-                fontWeight: 600,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: 'white',
-                border: '1px solid rgba(255,255,255,0.35)',
-                borderRadius: '9999px',
-                padding: '0.875rem 1.75rem',
-                transition: 'border-color 0.4s cubic-bezier(0.32,0.72,0,1), color 0.4s cubic-bezier(0.32,0.72,0,1), transform 0.4s cubic-bezier(0.32,0.72,0,1)',
+                fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.12em',
+                textTransform: 'uppercase', color: 'white', border: '1px solid rgba(255,255,255,0.35)',
+                borderRadius: '9999px', padding: '0.875rem 1.75rem',
+                transition: 'border-color 0.4s, color 0.4s, transform 0.4s',
               }}
               onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--color-brand-gold)'; el.style.color = 'var(--color-brand-gold)'; el.style.transform = 'translateY(-2px)' }}
               onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.35)'; el.style.color = 'white'; el.style.transform = 'translateY(0)' }}
@@ -143,6 +124,6 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
       </div>
-    </HeroParallax>
+    </HeroPinned>
   )
 }

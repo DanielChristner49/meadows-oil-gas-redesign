@@ -2,14 +2,14 @@ import { render, screen } from '@testing-library/react'
 import HeroSection from '@/components/home/HeroSection'
 
 describe('HeroSection', () => {
-  it('renders AI Infrastructure headline', () => {
+  it('renders main heading text', () => {
     render(<HeroSection />)
-    expect(screen.getByText(/AI INFRASTRUCTURE/i)).toBeInTheDocument()
+    expect(screen.getByText(/Trusted/i)).toBeInTheDocument()
   })
 
-  it('renders tagline', () => {
+  it('renders Title Services headline', () => {
     render(<HeroSection />)
-    expect(screen.getByText(/Turning Your Vision Into Reality/i)).toBeInTheDocument()
+    expect(screen.getByText(/Title Services/i)).toBeInTheDocument()
   })
 
   it('renders CTA link to /services', () => {
