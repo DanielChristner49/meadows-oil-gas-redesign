@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import OilHistoryTimeline from '@/components/about/OilHistoryTimeline'
+import HistoryTimeline, { type TimelineEra } from '@/components/about/HistoryTimeline'
 import { breadcrumbSchema } from '@/lib/seo'
 
 const breadcrumb = breadcrumbSchema([
@@ -20,118 +20,89 @@ export const metadata: Metadata = {
   },
 }
 
-const events = [
+const eras: TimelineEra[] = [
   {
     year: '1897',
-    type: 'industry' as const,
     title: "Oklahoma's First Commercial Well",
-    description:
-      "Bartlesville's Nellie Johnstone No. 1 becomes Oklahoma Territory's first commercial oil producer, marking the start of a century-long industry that would reshape the nation's energy landscape.",
+    body: "Bartlesville's Nellie Johnstone No. 1 becomes Oklahoma Territory's first commercial oil producer, marking the start of a century-long industry that would reshape the nation's energy landscape.",
   },
   {
     year: '1905',
-    type: 'industry' as const,
     title: 'Glenn Pool Discovery',
-    description:
-      'The Glenn Pool field near Tulsa triggers Oklahoma\'s first major oil boom, briefly making Oklahoma the world\'s largest oil-producing region and transforming Tulsa into the "Oil Capital of the World."',
+    body: 'The Glenn Pool field near Tulsa triggers Oklahoma\'s first major oil boom, briefly making Oklahoma the world\'s largest oil-producing region and transforming Tulsa into the "Oil Capital of the World."',
   },
   {
     year: '1907',
-    type: 'industry' as const,
     title: 'Oklahoma Statehood',
-    description:
-      'Oklahoma enters the Union with oil already shaping its economy — the industry funds early state government and infrastructure, and land title work becomes a critical profession.',
+    body: 'Oklahoma enters the Union with oil already shaping its economy — the industry funds early state government and infrastructure, and land title work becomes a critical profession.',
   },
   {
     year: '1912',
-    type: 'industry' as const,
     title: 'Cushing-Drumright Field',
-    description:
-      'Discovery of the Cushing-Drumright field — one of the largest in the world at the time — cements Oklahoma\'s role as the center of American oil production and drives intense leasehold competition.',
+    body: "Discovery of the Cushing-Drumright field — one of the largest in the world at the time — cements Oklahoma's role as the center of American oil production and drives intense leasehold competition.",
   },
   {
     year: '1920s',
-    type: 'industry' as const,
     title: 'The Seminole Boom',
-    description:
-      'The Seminole field and Greater Seminole area boom through the decade, driving rapid growth and intense land acquisition activity across central Oklahoma as major and independent operators compete for acreage.',
+    body: 'The Seminole field and Greater Seminole area boom through the decade, driving rapid growth and intense land acquisition activity across central Oklahoma as major and independent operators compete for acreage.',
   },
   {
     year: '1930s',
-    type: 'industry' as const,
     title: 'Depression & Proration',
-    description:
-      'The Great Depression collapses oil prices. Oklahoma regulators introduce proration to stabilize production — establishing the regulatory framework that governs well operations to this day.',
+    body: 'The Great Depression collapses oil prices. Oklahoma regulators introduce proration to stabilize production — establishing the regulatory framework that governs well operations to this day.',
   },
   {
     year: '1940s',
-    type: 'industry' as const,
     title: 'Fueling the War Effort',
-    description:
-      "Oklahoma oil fields run around the clock to supply Allied forces in World War II, cementing the industry's strategic importance and the critical role of land professionals in maintaining production.",
+    body: "Oklahoma oil fields run around the clock to supply Allied forces in World War II, cementing the industry's strategic importance and the critical role of land professionals in maintaining production.",
   },
   {
     year: '1970s',
-    type: 'industry' as const,
     title: 'Energy Crisis & Oklahoma Boom',
-    description:
-      "The OPEC oil embargo triggers skyrocketing prices and an Oklahoma drilling boom — rigs run day and night across the mid-continent, and courthouse research becomes frenetic as operators race to lease.",
+    body: "The OPEC oil embargo triggers skyrocketing prices and an Oklahoma drilling boom — rigs run day and night across the mid-continent, and courthouse research becomes frenetic as operators race to lease.",
   },
   {
     year: '1980s',
-    type: 'industry' as const,
     title: 'The Bust',
-    description:
-      "Collapsed oil prices devastate Oklahoma's economy. Thousands of wells shut in. Land professionals learn to navigate distressed title, mineral estates in probate, and complex curative work — skills that define the profession.",
+    body: "Collapsed oil prices devastate Oklahoma's economy. Thousands of wells shut in. Land professionals learn to navigate distressed title, mineral estates in probate, and complex curative work — skills that define the profession.",
   },
   {
     year: '1990s',
-    type: 'industry' as const,
     title: 'Recovery & Modernization',
-    description:
-      "Oklahoma's oil sector stabilizes through independent operators. Land practice matures — courthouse research, title opinion writing, and ownership runs become increasingly specialized.",
+    body: "Oklahoma's oil sector stabilizes through independent operators. Land practice matures — courthouse research, title opinion writing, and ownership runs become increasingly specialized.",
   },
   {
     year: '2000s',
-    type: 'industry' as const,
     title: 'Gas Boom & Horizontal Drilling',
-    description:
-      "The natural gas boom and emergence of horizontal drilling begin reshaping Oklahoma's play landscape. Lease terms, ROW agreements, and title work grow more complex as operators push into new formations.",
+    body: "The natural gas boom and emergence of horizontal drilling begin reshaping Oklahoma's play landscape. Lease terms, ROW agreements, and title work grow more complex as operators push into new formations.",
   },
   {
     year: '2009',
-    type: 'meadows' as const,
     title: 'Meadows Oil & Gas Founded',
-    description:
-      'Zach Meadows establishes Meadows Oil & Gas Corporation in Edmond, Oklahoma — focused on leasehold acquisition and title services for Oklahoma operators at the start of a transformative decade for the state\'s energy industry.',
+    body: "Zach Meadows establishes Meadows Oil & Gas Corporation in Edmond, Oklahoma — focused on leasehold acquisition and title services for Oklahoma operators at the start of a transformative decade for the state's energy industry.",
+    isMeadows: true,
   },
   {
     year: '2011',
-    type: 'industry' as const,
     title: 'SCOOP & STACK Plays Emerge',
-    description:
-      "Oklahoma's South Central Oklahoma Oil Province (SCOOP) and Sooner Trend Anadarko Basin (STACK) plays become world-class shale targets, driving intense acquisition activity and cementing the mid-continent's resurgence.",
+    body: "Oklahoma's South Central Oklahoma Oil Province (SCOOP) and Sooner Trend Anadarko Basin (STACK) plays become world-class shale targets, driving intense acquisition activity and cementing the mid-continent's resurgence.",
   },
   {
     year: '2017',
-    type: 'meadows' as const,
     title: 'Wind Leasing Practice Launched',
-    description:
-      "Meadows expands into renewable energy land services — wind leasing for Oklahoma and Kansas landowners and operators — reflecting the industry's broadening energy mix and the evolving role of the land professional.",
+    body: "Meadows expands into renewable energy land services — wind leasing for Oklahoma and Kansas landowners and operators — reflecting the industry's broadening energy mix and the evolving role of the land professional.",
+    isMeadows: true,
   },
   {
     year: '2019',
-    type: 'meadows' as const,
     title: 'Ten Years & Three States',
-    description:
-      'A decade of service, now covering Oklahoma, Kansas, and Texas with full courthouse research, title opinions, right-of-way, and GIS mapping capabilities for operators across the central plains.',
+    body: 'A decade of service, now covering Oklahoma, Kansas, and Texas with full courthouse research, title opinions, right-of-way, and GIS mapping capabilities for operators across the central plains.',
+    isMeadows: true,
   },
   {
     year: '2020s',
-    type: 'industry' as const,
     title: 'The Energy Transition',
-    description:
-      "Oklahoma balances its oil and gas legacy with growing wind and solar development. Land professionals adapt as multi-energy projects — wind leases alongside mineral rights, ROW corridors for both pipelines and transmission lines — become the new normal.",
+    body: "Oklahoma balances its oil and gas legacy with growing wind and solar development. Land professionals adapt as multi-energy projects — wind leases alongside mineral rights, ROW corridors for both pipelines and transmission lines — become the new normal.",
   },
 ]
 
@@ -208,11 +179,7 @@ export default function OilHistoryPage() {
       </div>
 
       {/* Timeline */}
-      <div style={{ backgroundColor: '#0a0a0a', padding: '4rem 0' }}>
-        <div className="container-max px-6 sm:px-8">
-          <OilHistoryTimeline events={events} />
-        </div>
-      </div>
+      <HistoryTimeline eras={eras} />
 
       {/* Legend */}
       <div style={{ backgroundColor: '#0d0d0d', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
