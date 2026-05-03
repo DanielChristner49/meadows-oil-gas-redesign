@@ -44,3 +44,6 @@ next-env.d.ts
 .planning/
 .superpowers/
 docs/superpowers/
+
+# git worktrees
+.worktrees/
