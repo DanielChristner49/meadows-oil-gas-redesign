@@ -78,15 +78,18 @@ framer-motion  (~50KB gzipped)
 
 Acceptable given Mapbox GL JS (~250KB) is already in the bundle.
 
-### Reusable Component
+### Reusable Components
 
 `components/ui/FadeUp.tsx` — a wrapper that applies scroll-triggered fade + slide-up to any children. Accepts `delay` prop for stagger control. Replaces all `.reveal-up` + IntersectionObserver usage site-wide.
+
+`components/home/HeroParallax.tsx` — wraps the homepage hero section. Uses Framer Motion `useScroll` (tracking scroll progress relative to the hero container) and `useTransform` to map scroll position to a `y` translate on the background image layer (e.g., `[0, 1] → ['0%', '40%']`). The text content scrolls at normal speed; only the oil field background moves slower, creating depth. Works on mobile without the performance issues of CSS `background-attachment: fixed`.
 
 ### Animation Inventory
 
 | Element | Animation |
 |---|---|
 | Page entrance | Fade + slide up via `AnimatePresence` in root layout |
+| **Hero parallax** | Oil field background image scrolls at ~40% of scroll speed via `useScroll` + `useTransform` — creates depth as the user scrolls into the page |
 | Section reveals | `<FadeUp>` scroll-triggered fade + slide up (replaces `.reveal-up`) |
 | Staggered lists | Service cards, gallery grid, FAQ items — sequential child delays |
 | Stats bar numbers | Count-up on scroll into view |
@@ -109,7 +112,7 @@ Steps are independently deployable. Nothing breaks mid-build.
 3. **Vercel deploy webhook** — configure in Sanity project settings, add `SANITY_WEBHOOK_SECRET` to Vercel env vars
 4. **Install Framer Motion** — add package, create `components/ui/FadeUp.tsx`
 5. **Replace animation system** — swap `.reveal-up` / IntersectionObserver usage site-wide with `<FadeUp>` and Framer Motion primitives
-6. **Polish passes** — stats count-up, hero headline entrance, hover effects, `AnimatePresence` page transitions
+6. **Polish passes** — hero parallax (`HeroParallax`), stats count-up, hero headline entrance, hover effects, `AnimatePresence` page transitions
 7. **Deploy + verify** — confirm Studio publish → webhook → rebuild → live site end-to-end
 
 ---
