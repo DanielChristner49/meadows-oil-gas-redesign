@@ -3,25 +3,17 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
-const images = [
-  { src: '/images/gallery-01.jpg', alt: 'Oil rigs at sunset across Oklahoma plains' },
-  { src: '/images/gallery-02.jpg', alt: 'Drilling operations in the field' },
-  { src: '/images/gallery-03.jpg', alt: 'Land survey and field operations' },
-  { src: '/images/gallery-04.jpg', alt: 'Energy infrastructure development' },
-  { src: '/images/gallery-05.jpg', alt: 'Oil and gas field work' },
-  { src: '/images/gallery-06.jpg', alt: 'Meadows field team operations' },
-  { src: '/images/gallery-07.jpg', alt: 'Energy development project' },
-  { src: '/images/gallery-08.jpg', alt: 'Oil field equipment at dawn' },
-  { src: '/images/gallery-09.jpg', alt: 'Pipeline right-of-way corridor' },
-  { src: '/images/gallery-10.jpg', alt: 'Drilling rig at night operations' },
-  { src: '/images/gallery-11.jpg', alt: 'Land operations across the plains' },
-  { src: '/images/gallery-12.jpg', alt: 'Field crew coordinating on site' },
-  { src: '/images/gallery-13.jpg', alt: 'Energy project infrastructure' },
-  { src: '/images/gallery-14.jpg', alt: 'Oklahoma oil and gas field work' },
-  { src: '/images/gallery-15.jpg', alt: 'Field operations and equipment' },
-]
+interface GalleryImage {
+  src: string
+  alt: string
+  caption?: string
+}
 
-export default function GalleryClient() {
+interface Props {
+  images: GalleryImage[]
+}
+
+export default function GalleryClient({ images }: Props) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
