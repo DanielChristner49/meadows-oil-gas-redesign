@@ -5,6 +5,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import BackToTop from '@/components/ui/BackToTop'
 import MobileStickyBar from '@/components/ui/MobileStickyBar'
+import PageTransition from '@/components/layout/PageTransition'
 
 const BASE_URL = 'https://meadows-oil-gas-redesign.vercel.app'
 
@@ -133,7 +134,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Navbar />
-        <main id="main-content" className="pb-[3.5rem] md:pb-0">{children}</main>
+        <main id="main-content" className="pb-[3.5rem] md:pb-0"><PageTransition>{children}</PageTransition></main>
         <Footer />
         <BackToTop />
         <MobileStickyBar />

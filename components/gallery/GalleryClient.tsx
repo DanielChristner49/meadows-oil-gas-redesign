@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 const images = [
   { src: '/images/gallery-01.jpg', alt: 'Oil rigs at sunset across Oklahoma plains' },
@@ -96,42 +97,49 @@ export default function GalleryClient() {
           style={{ columns: '3 280px', gap: '0.5rem' }}
         >
           {images.map((img, i) => (
-            <button
+            <motion.div
               key={img.src}
-              onClick={() => setLightboxIndex(i)}
+              whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(0,0,0,0.35)' }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="overflow-hidden rounded-lg"
               style={{
-                display: 'block',
-                width: '100%',
                 breakInside: 'avoid',
                 marginBottom: '0.5rem',
-                borderRadius: '0.375rem',
-                overflow: 'hidden',
-                border: 'none',
-                padding: 0,
-                cursor: 'pointer',
               }}
-              aria-label={`View photo: ${img.alt}`}
             >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                width={900}
-                height={600}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              <button
+                onClick={() => setLightboxIndex(i)}
                 style={{
-                  width: '100%',
-                  height: 'auto',
                   display: 'block',
-                  transition: 'transform 0.45s cubic-bezier(0.32,0.72,0,1)',
+                  width: '100%',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
+                  background: 'none',
                 }}
-                onMouseEnter={(e) => {
-                  ;(e.currentTarget as HTMLImageElement).style.transform = 'scale(1.04)'
-                }}
-                onMouseLeave={(e) => {
-                  ;(e.currentTarget as HTMLImageElement).style.transform = 'scale(1)'
-                }}
-              />
-            </button>
+                aria-label={`View photo: ${img.alt}`}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  width={900}
+                  height={600}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    display: 'block',
+                    transition: 'transform 0.45s cubic-bezier(0.32,0.72,0,1)',
+                  }}
+                  onMouseEnter={(e) => {
+                    ;(e.currentTarget as HTMLImageElement).style.transform = 'scale(1.04)'
+                  }}
+                  onMouseLeave={(e) => {
+                    ;(e.currentTarget as HTMLImageElement).style.transform = 'scale(1)'
+                  }}
+                />
+              </button>
+            </motion.div>
           ))}
         </div>
       </div>

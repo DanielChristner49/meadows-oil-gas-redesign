@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import FadeUp from '@/components/ui/FadeUp'
 
 const services = [
@@ -46,6 +47,11 @@ function ServiceCard({
 }: (typeof services)[0] & { delay: number }) {
   return (
     <FadeUp delay={delay} className="h-full">
+      <motion.div
+        whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
+        className="h-full"
+      >
       <Link
         href={href}
         className="group block h-full"
@@ -156,6 +162,7 @@ function ServiceCard({
           </div>
         </div>
       </Link>
+      </motion.div>
     </FadeUp>
   )
 }

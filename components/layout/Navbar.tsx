@@ -20,6 +20,7 @@ const externalLinks = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -29,6 +30,12 @@ export default function Navbar() {
     return () => document.removeEventListener('keydown', onKey)
   }, [mobileOpen])
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/')
 
@@ -36,7 +43,11 @@ export default function Navbar() {
     <>
       <header
         className="sticky top-0 z-[60] pointer-events-none"
-        style={{ padding: '1rem 1rem 0.5rem' }}
+        style={{
+          padding: '1rem 1rem 0.5rem',
+          boxShadow: scrolled ? '0 1px 24px rgba(0,0,0,0.5)' : 'none',
+          transition: 'box-shadow 0.3s ease',
+        }}
       >
         <div
           className="container-max pointer-events-auto flex items-center justify-between"
