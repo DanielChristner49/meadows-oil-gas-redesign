@@ -1,21 +1,23 @@
 'use client'
 
-import { ElementType, ReactNode, useRef } from 'react'
+import { ReactNode, useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
+
+type AllowedTag = 'div' | 'section' | 'article' | 'span' | 'header' | 'footer' | 'main' | 'aside'
 
 interface FadeUpProps {
   children: ReactNode
   delay?: number
   className?: string
-  as?: ElementType
+  as?: AllowedTag
 }
 
 export default function FadeUp({ children, delay = 0, className = '', as: Tag = 'div' }: FadeUpProps) {
-  const ref = useRef(null)
+  const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
   const reduceMotion = useReducedMotion()
 
-  const MotionTag = (motion[Tag as keyof typeof motion] ?? motion.div) as typeof motion.div
+  const MotionTag = motion[Tag] as typeof motion.div
 
   return (
     <MotionTag
