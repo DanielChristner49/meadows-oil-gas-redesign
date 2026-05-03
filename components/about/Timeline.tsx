@@ -1,5 +1,5 @@
 'use client'
-import ScrollReveal from '@/components/ui/ScrollReveal'
+import FadeUp from '@/components/ui/FadeUp'
 
 interface TimelineEvent {
   year: string
@@ -11,7 +11,7 @@ export default function Timeline({ events }: { events: TimelineEvent[] }) {
   return (
     <ol className="space-y-0">
       {events.map(({ year, title, description }, i) => (
-        <ScrollReveal key={year} delay={i * 100} as="li" className="relative flex gap-6">
+        <FadeUp key={year} delay={i * 100} as="li" className="relative flex gap-6">
             {/* Connector column */}
             <div className="relative flex-shrink-0 flex flex-col items-center" style={{ width: '3.5rem' }}>
               <div
@@ -54,7 +54,7 @@ export default function Timeline({ events }: { events: TimelineEvent[] }) {
                 {description}
               </p>
             </div>
-        </ScrollReveal>
+        </FadeUp>
       ))}
     </ol>
   )

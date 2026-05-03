@@ -3,7 +3,7 @@
 import { ReactNode, useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 
-type AllowedTag = 'div' | 'section' | 'article' | 'span' | 'header' | 'footer' | 'main' | 'aside'
+type AllowedTag = 'div' | 'section' | 'article' | 'span' | 'header' | 'footer' | 'main' | 'aside' | 'li'
 
 interface FadeUpProps {
   children: ReactNode
@@ -13,7 +13,8 @@ interface FadeUpProps {
 }
 
 export default function FadeUp({ children, delay = 0, className = '', as: Tag = 'div' }: FadeUpProps) {
-  const ref = useRef<HTMLElement>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ref = useRef<any>(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
   const reduceMotion = useReducedMotion()
 

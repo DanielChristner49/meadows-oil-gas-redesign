@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import ScrollReveal from '@/components/ui/ScrollReveal'
+import FadeUp from '@/components/ui/FadeUp'
 
 const services = [
   {
@@ -45,7 +45,7 @@ function ServiceCard({
   delay,
 }: (typeof services)[0] & { delay: number }) {
   return (
-    <ScrollReveal delay={delay} className="h-full">
+    <FadeUp delay={delay} className="h-full">
       <Link
         href={href}
         className="group block h-full"
@@ -156,7 +156,7 @@ function ServiceCard({
           </div>
         </div>
       </Link>
-    </ScrollReveal>
+    </FadeUp>
   )
 }
 
@@ -169,7 +169,7 @@ export default function ServicesPreview() {
       <div className="container-max px-6 sm:px-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
-          <ScrollReveal>
+          <FadeUp>
             <span className="section-label">What We Do</span>
             <h2
               className="text-white leading-none"
@@ -182,9 +182,9 @@ export default function ServicesPreview() {
             >
               Core Services
             </h2>
-          </ScrollReveal>
+          </FadeUp>
 
-          <ScrollReveal delay={100}>
+          <FadeUp delay={100}>
             <Link
               href="/services"
               className="shrink-0 self-start md:self-auto inline-flex items-center gap-2 text-xs tracking-widest uppercase"
@@ -209,7 +209,7 @@ export default function ServicesPreview() {
             >
               All Services →
             </Link>
-          </ScrollReveal>
+          </FadeUp>
         </div>
 
         {/* Bento grid */}

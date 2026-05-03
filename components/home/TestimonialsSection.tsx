@@ -1,4 +1,4 @@
-import ScrollReveal from '@/components/ui/ScrollReveal'
+import FadeUp from '@/components/ui/FadeUp'
 
 const testimonials = [
   {
@@ -28,7 +28,7 @@ export default function TestimonialsSection() {
   return (
     <section style={{ backgroundColor: 'var(--color-brand-surface)', borderTop: '1px solid rgba(212,151,26,0.1)' }}>
       <div className="container-max px-6 sm:px-8" style={{ paddingTop: '5rem', paddingBottom: '5rem' }}>
-        <ScrollReveal>
+        <FadeUp>
           <div className="mb-12">
             <span className="section-label">Client Perspective</span>
             <h2
@@ -38,11 +38,11 @@ export default function TestimonialsSection() {
               What Operators Say
             </h2>
           </div>
-        </ScrollReveal>
+        </FadeUp>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map(({ quote, author, role, company }, i) => (
-            <ScrollReveal key={author} delay={i * 100}>
+            <FadeUp key={author} delay={i * 100}>
               <div
                 className="flex flex-col h-full p-8 rounded-lg"
                 style={{
@@ -88,7 +88,7 @@ export default function TestimonialsSection() {
                   </p>
                 </footer>
               </div>
-            </ScrollReveal>
+            </FadeUp>
           ))}
         </div>
       </div>

@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import ScrollReveal from '@/components/ui/ScrollReveal'
+import FadeUp from '@/components/ui/FadeUp'
 
 export default function CTASection() {
   return (
@@ -10,7 +10,7 @@ export default function CTASection() {
       }}
     >
       <div className="container-max px-6 sm:px-8" style={{ paddingTop: '6rem', paddingBottom: '6rem' }}>
-        <ScrollReveal>
+        <FadeUp>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
             <div>
               <h2
@@ -84,7 +84,7 @@ export default function CTASection() {
               </span>
             </Link>
           </div>
-        </ScrollReveal>
+        </FadeUp>
       </div>
     </section>
   )

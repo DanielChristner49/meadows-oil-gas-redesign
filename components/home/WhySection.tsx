@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import ScrollReveal from '@/components/ui/ScrollReveal'
+import FadeUp from '@/components/ui/FadeUp'
 
 const points = [
   {
@@ -25,7 +25,7 @@ export default function WhySection() {
   return (
     <section style={{ backgroundColor: '#f5f5f5', borderBottom: '1px solid rgba(0,0,0,0.07)' }}>
       <div className="container-max px-6 sm:px-8" style={{ paddingTop: '5rem', paddingBottom: '5rem' }}>
-        <ScrollReveal>
+        <FadeUp>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
             <div>
               <span className="section-label">Why Meadows</span>
@@ -39,11 +39,11 @@ export default function WhySection() {
               About Our Company →
             </Link>
           </div>
-        </ScrollReveal>
+        </FadeUp>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {points.map(({ heading, body }, i) => (
-            <ScrollReveal key={heading} delay={i * 100}>
+            <FadeUp key={heading} delay={i * 100}>
               <div
                 className="block p-8 h-full"
                 style={{
@@ -70,12 +70,12 @@ export default function WhySection() {
                   {body}
                 </p>
               </div>
-            </ScrollReveal>
+            </FadeUp>
           ))}
         </div>
 
         {/* Founder quote */}
-        <ScrollReveal delay={200}>
+        <FadeUp delay={200}>
           <div
             className="p-8 md:p-12"
             style={{
@@ -111,7 +111,7 @@ export default function WhySection() {
               </footer>
             </blockquote>
           </div>
-        </ScrollReveal>
+        </FadeUp>
       </div>
     </section>
   )
