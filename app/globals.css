@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-navy: #0a0a0a;
+  --color-brand-navy: #050505;
   --color-brand-navy-light: #1a1a1a;
-  --color-brand-surface: #111111;
+  --color-brand-surface: #0d0d0d;
   --color-brand-gold: #c8921a;
   --color-brand-gold-light: #d9a83a;
   --color-brand-green: #2d7d3a;
@@ -11,6 +11,8 @@
   --color-brand-cream: #ffffff;
   --color-brand-charcoal: #111111;
   --color-brand-gray: #6b7280;
+  --color-card-bg: #111010;
+  --color-champagne: #f5e6c8;
 
   --font-display: 'Oswald', 'Arial Narrow', sans-serif;
   --font-sans: 'DM Sans', system-ui, sans-serif;

@@ -5,11 +5,11 @@ const globalsCss = readFileSync(join(process.cwd(), 'app/globals.css'), 'utf-8')
 
 describe('Brand design system CSS', () => {
   it('defines brand-navy color', () => {
-    expect(globalsCss).toContain('--color-brand-navy: #1a2744')
+    expect(globalsCss).toContain('--color-brand-navy: #050505')
   })
 
   it('defines brand-gold color', () => {
-    expect(globalsCss).toContain('--color-brand-gold: #d4971a')
+    expect(globalsCss).toContain('--color-brand-gold: #c8921a')
   })
 
   it('defines brand-green color', () => {
