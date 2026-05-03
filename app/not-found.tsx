@@ -1,4 +1,9 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: '404 — Page Not Found',
+}
 
 export default function NotFound() {
   return (
@@ -73,7 +78,7 @@ export default function NotFound() {
       <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8">
         {[
           ['Services', '/services'],
-          ['Projects', '/projects'],
+          ['Gallery', '/gallery'],
           ['About', '/about'],
           ['Contact', '/contact'],
         ].map(([label, href]) => (

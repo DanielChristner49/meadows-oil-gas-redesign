@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -8,6 +8,7 @@ const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Services', href: '/services' },
+  { label: 'Gallery', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -20,6 +21,13 @@ const externalLinks = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
+
+  useEffect(() => {
+    if (!mobileOpen) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMobileOpen(false) }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [mobileOpen])
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/')
@@ -107,6 +115,8 @@ export default function Navbar() {
             className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? 'close menu' : 'open menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
           >
             <span
               style={{
@@ -149,6 +159,11 @@ export default function Navbar() {
 
       {/* Mobile full-screen overlay */}
       <div
+        id="mobile-nav"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+        aria-hidden={!mobileOpen}
         className="fixed inset-0 z-[55] flex flex-col md:hidden"
         style={{
           backgroundColor: 'rgba(0,0,0,0.97)',

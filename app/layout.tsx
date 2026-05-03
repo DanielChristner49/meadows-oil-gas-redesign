@@ -4,6 +4,56 @@ import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import BackToTop from '@/components/ui/BackToTop'
+import MobileStickyBar from '@/components/ui/MobileStickyBar'
+
+const BASE_URL = 'https://meadows-oil-gas-redesign.vercel.app'
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'ProfessionalService'],
+  '@id': `${BASE_URL}/#organization`,
+  name: 'Meadows Oil & Gas Corporation',
+  legalName: 'Meadows Oil & Gas Corporation',
+  url: BASE_URL,
+  logo: `${BASE_URL}/images/logo.png`,
+  foundingDate: '2009',
+  description:
+    'Expert land brokerage, title opinions, leasehold acquisitions, right-of-way, and wind leasing services across Oklahoma, Kansas, Texas, and beyond.',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '609 S. Kelly Ave., Suite G3',
+    addressLocality: 'Edmond',
+    addressRegion: 'OK',
+    postalCode: '73003',
+    addressCountry: 'US',
+  },
+  telephone: '+14052858500',
+  faxNumber: '+14052858598',
+  email: 'info@meadowsoilandgas.com',
+  areaServed: ['Oklahoma', 'Kansas', 'Texas'],
+  sameAs: ['https://www.linkedin.com/company/meadowsoil'],
+  memberOf: [
+    {
+      '@type': 'Organization',
+      name: 'American Association of Professional Landmen',
+      url: 'https://www.landman.org',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Oklahoma City Association of Professional Landmen',
+      url: 'https://www.ocapl.org',
+    },
+  ],
+}
+
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${BASE_URL}/#website`,
+  url: BASE_URL,
+  name: 'Meadows Oil and Gas',
+  publisher: { '@id': `${BASE_URL}/#organization` },
+}
 
 const oswald = Oswald({
   weight: ['400', '500', '600', '700'],
@@ -25,15 +75,18 @@ export const metadata: Metadata = {
     default: 'Meadows Oil and Gas — Land Brokerage & Energy Services',
   },
   description:
-    'Meadows Oil and Gas provides expert land brokerage, mineral rights, title opinions, seismic mapping, and wind leasing services across Oklahoma, California, and beyond.',
+    'Meadows Oil and Gas provides expert land brokerage, title opinions, leasehold acquisitions, right-of-way, and wind leasing services across Oklahoma, Kansas, Texas, and beyond.',
   keywords: [
     'oil and gas',
     'land brokerage',
     'mineral rights',
     'title services',
     'wind leasing',
-    'Oklahoma City',
-    'Bakersfield',
+    'leasehold acquisitions',
+    'right of way',
+    'Oklahoma',
+    'Kansas',
+    'Texas',
     'AAPL',
     'OCAPL',
   ],
@@ -58,6 +111,9 @@ export const metadata: Metadata = {
     description: 'Expert land brokerage, mineral rights, title services, and wind leasing across the United States.',
     images: ['/images/gallery-01.jpg'],
   },
+  other: {
+    'theme-color': '#1a2744',
+  },
 }
 
 
@@ -77,9 +133,11 @@ export default function RootLayout({
           Skip to content
         </a>
         <Navbar />
-        <main id="main-content">{children}</main>
+        <main id="main-content" className="pb-[3.5rem] md:pb-0">{children}</main>
         <Footer />
         <BackToTop />
+        <MobileStickyBar />
+        <script type="application/ld+json">{JSON.stringify([localBusinessSchema, webSiteSchema]).replace(/&/g, '\\u0026')}</script>
       </body>
     </html>
   )

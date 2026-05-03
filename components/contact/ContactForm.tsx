@@ -52,16 +52,26 @@ function Label({ htmlFor, children }: { htmlFor: string; children: React.ReactNo
 
 function addFocusGold(e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
   const el = e.currentTarget as HTMLElement
-  el.style.boxShadow = '0 0 0 2.5px rgba(212,151,26,0.4)'
-  el.style.borderColor = 'rgba(212,151,26,0.6)'
+  const hasError = el.dataset.error === 'true'
+  el.style.boxShadow = hasError
+    ? '0 0 0 2.5px rgba(220,38,38,0.2)'
+    : '0 0 0 2.5px rgba(212,151,26,0.4)'
+  if (!hasError) el.style.borderColor = 'rgba(212,151,26,0.6)'
 }
 function removeFocus(e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
   const el = e.currentTarget as HTMLElement
+  const hasError = el.dataset.error === 'true'
   el.style.boxShadow = 'none'
-  el.style.borderColor = 'rgba(26,39,68,0.12)'
+  if (!hasError) el.style.borderColor = 'rgba(26,39,68,0.12)'
 }
 
-export default function ContactForm({ formEndpoint }: { formEndpoint: string }) {
+export default function ContactForm({
+  formEndpoint,
+  defaultService,
+}: {
+  formEndpoint: string
+  defaultService?: string
+}) {
   const [submitted, setSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState(false)
 
@@ -69,7 +79,10 @@ export default function ContactForm({ formEndpoint }: { formEndpoint: string }) 
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({ resolver: zodResolver(schema) })
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: { service: defaultService ?? '' },
+  })
 
   async function onSubmit(data: FormData) {
     setSubmitError(false)
@@ -116,6 +129,7 @@ export default function ContactForm({ formEndpoint }: { formEndpoint: string }) 
           aria-required="true"
           aria-describedby={errors.name ? 'name-error' : undefined}
           {...register('name')}
+          data-error={errors.name ? 'true' : 'false'}
           style={{ ...fieldStyle, borderColor: errors.name ? 'rgba(220,38,38,0.6)' : 'rgba(26,39,68,0.12)' }}
           onFocus={addFocusGold}
           onBlur={removeFocus}
@@ -132,6 +146,7 @@ export default function ContactForm({ formEndpoint }: { formEndpoint: string }) 
           aria-required="true"
           aria-describedby={errors.email ? 'email-error' : undefined}
           {...register('email')}
+          data-error={errors.email ? 'true' : 'false'}
           style={{ ...fieldStyle, borderColor: errors.email ? 'rgba(220,38,38,0.6)' : 'rgba(26,39,68,0.12)' }}
           onFocus={addFocusGold}
           onBlur={removeFocus}
@@ -166,7 +181,9 @@ export default function ContactForm({ formEndpoint }: { formEndpoint: string }) 
           <option>Title Opinions</option>
           <option>Right-of-Ways</option>
           <option>Wind Leasing</option>
-          <option>Mapping Services</option>
+          <option>GIS Mapping</option>
+          <option>Seismic Mapping</option>
+          <option>Digital Imagery</option>
           <option>Other</option>
         </select>
       </Field>
@@ -180,6 +197,7 @@ export default function ContactForm({ formEndpoint }: { formEndpoint: string }) 
           aria-required="true"
           aria-describedby={errors.message ? 'message-error' : undefined}
           {...register('message')}
+          data-error={errors.message ? 'true' : 'false'}
           style={{ ...(fieldStyle as React.CSSProperties), borderColor: errors.message ? 'rgba(220,38,38,0.6)' : 'rgba(26,39,68,0.12)' }}
           onFocus={addFocusGold as unknown as React.FocusEventHandler<HTMLTextAreaElement>}
           onBlur={removeFocus as unknown as React.FocusEventHandler<HTMLTextAreaElement>}

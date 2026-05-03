@@ -8,7 +8,7 @@ const services = [
     title: 'Leasing & Acquisitions',
     description:
       'Expert leasehold acquisition services helping operators and investors move quickly with clear ownership data and experienced execution.',
-    href: '/services',
+    href: '/services/brokerage#leasing',
     accent: '#c8921a',
     span: 'md:col-span-2',
     large: true,
@@ -18,18 +18,18 @@ const services = [
     title: 'Title Services',
     description:
       'Dependable title work including title opinions, curative work, and ownership reporting across Oklahoma, Kansas, Texas, and beyond.',
-    href: '/services',
+    href: '/services/brokerage#title',
     accent: '#c8921a',
     span: 'md:col-span-1',
     large: false,
   },
   {
     number: '03',
-    title: 'AI Data Center Development',
+    title: 'Right-of-Way & Wind Leasing',
     description:
-      'Land and title solutions for advanced computing and AI infrastructure development — turning your vision into reality.',
-    href: '/services',
-    accent: '#c8921a',
+      'Full-service right-of-way acquisition and wind leasing support — navigating easements, surface agreements, and renewable energy transitions across the central plains.',
+    href: '/services/wind',
+    accent: '#3d9e4c',
     span: 'md:col-span-3',
     large: false,
   },

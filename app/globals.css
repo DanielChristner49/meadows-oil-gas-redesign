@@ -18,6 +18,10 @@
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 5rem; /* offset for sticky navbar on anchor jumps */
+  }
+
   body {
     background-color: var(--color-brand-cream);
     color: var(--color-brand-charcoal);
@@ -41,7 +45,7 @@
     border-radius: 2px;
   }
 
-  * {
+  html {
     scroll-behavior: smooth;
   }
 }
@@ -217,4 +221,20 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* FAQ accordion — open state indicator */
+details[open] > summary span[aria-hidden] {
+  content: '−';
+  transform: rotate(45deg);
+  display: inline-block;
+}
+details[open] {
+  border-left-color: var(--color-brand-gold) !important;
+}
+details summary::-webkit-details-marker {
+  display: none;
+}
+details summary::marker {
+  display: none;
 }

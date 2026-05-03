@@ -10,10 +10,10 @@ const testimonials = [
   },
   {
     quote:
-      'We engaged Meadows for right-of-way work across three California counties. Their landmen understood San Joaquin ownership complexity — no surprises at closing.',
+      'We engaged Meadows for a title run across multiple Kansas sections. Their abstractors caught a chain of title gap that would have cost us at closing — fast turnaround, no excuses.',
     author: 'D. Vasquez',
     role: 'Sr. Land Acquisitions',
-    company: 'Pacific Basin Operating Co.',
+    company: 'Midcontinent Energy Partners',
   },
   {
     quote:

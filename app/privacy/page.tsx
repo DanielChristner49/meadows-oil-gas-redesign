@@ -4,7 +4,12 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
+  description: 'How Meadows Oil and Gas Corporation handles the information you share with us through our website and contact form.',
   alternates: { canonical: '/privacy' },
+  openGraph: {
+    title: 'Privacy Policy | Meadows Oil and Gas',
+    description: 'How Meadows Oil and Gas Corporation handles the information you share with us.',
+  },
 }
 
 const sections = [
@@ -22,7 +27,7 @@ const sections = [
   },
   {
     heading: 'Third-Party Services',
-    body: 'Our website uses Mapbox for interactive mapping and Vercel for hosting. These services may collect limited technical data in accordance with their own privacy policies.',
+    body: 'Our website uses Vercel for hosting and Formspree for contact form processing. These services may collect limited technical data in accordance with their own privacy policies.',
   },
   {
     heading: 'Contact Us',

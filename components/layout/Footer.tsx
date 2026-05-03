@@ -1,12 +1,24 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { MapPin, Phone } from 'lucide-react'
+import { MapPin, Phone, Mail } from 'lucide-react'
 
-const links = [
+const navLinks = [
   ['Home', '/'],
   ['About', '/about'],
-  ['Services', '/services'],
+  ['How We Work', '/about/process'],
+  ['FAQ', '/faq'],
+  ['Gallery', '/gallery'],
   ['Contact', '/contact'],
+  ['Careers', '/careers'],
+  ['Resources', '/resources'],
+  ['Privacy Policy', '/privacy'],
+] as const
+
+const serviceLinks = [
+  ['All Services', '/services'],
+  ['Brokerage & Land', '/services/brokerage'],
+  ['GIS & Mapping', '/services/technical'],
+  ['Wind Leasing', '/services/wind'],
 ] as const
 
 const externalLinks = [
@@ -30,7 +42,7 @@ export default function Footer() {
       <div className="container-max px-6 sm:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           {/* Brand */}
-          <div className="md:col-span-5">
+          <div className="md:col-span-4">
             <Image
               src="/images/logo.png"
               alt="Meadows Oil & Gas Corp."
@@ -45,26 +57,33 @@ export default function Footer() {
             </p>
 
             <div className="flex gap-3 mt-5">
-              {['AAPL Member', 'OCAPL Member'].map((badge) => (
-                <span
-                  key={badge}
-                  className="text-xs px-2.5 py-1.5 border"
+              {[
+                { label: 'AAPL Member', href: 'https://www.landman.org' },
+                { label: 'OCAPL Member', href: 'https://www.ocapl.org' },
+              ].map(({ label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs px-2.5 py-1.5 border transition-opacity hover:opacity-100"
                   style={{
                     fontFamily: 'var(--font-display)',
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase',
                     color: 'var(--color-brand-gold)',
                     borderColor: 'rgba(200,146,26,0.3)',
+                    opacity: 0.85,
                   }}
                 >
-                  {badge}
-                </span>
+                  {label}
+                </a>
               ))}
             </div>
           </div>
 
           {/* Navigation */}
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <p
               className="text-white text-xs tracking-widest uppercase mb-5"
               style={{ fontFamily: 'var(--font-display)' }}
@@ -72,7 +91,7 @@ export default function Footer() {
               Navigation
             </p>
             <ul className="space-y-3">
-              {links.map(([label, href]) => (
+              {navLinks.map(([label, href]) => (
                 <li key={href}>
                   <Link
                     href={href}
@@ -94,6 +113,29 @@ export default function Footer() {
                   >
                     {label} ↗
                   </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div className="md:col-span-2">
+            <p
+              className="text-white text-xs tracking-widest uppercase mb-5"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              Services
+            </p>
+            <ul className="space-y-3">
+              {serviceLinks.map(([label, href]) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm transition-colors hover:text-white"
+                    style={{ fontFamily: 'var(--font-sans)' }}
+                  >
+                    {label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -138,6 +180,20 @@ export default function Footer() {
                   </a>
                   <p style={{ fontFamily: 'var(--font-sans)' }}>Fax: 405.285.8598</p>
                 </div>
+              </div>
+              <div className="flex gap-3">
+                <Mail
+                  size={14}
+                  style={{ color: 'var(--color-brand-gold)' }}
+                  className="mt-0.5 shrink-0"
+                />
+                <a
+                  href="mailto:info@meadowsoilandgas.com"
+                  className="text-white hover:opacity-80 transition-opacity"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  info@meadowsoilandgas.com
+                </a>
               </div>
             </div>
           </div>

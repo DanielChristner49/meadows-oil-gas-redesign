@@ -85,7 +85,7 @@ export default function HeroSection() {
                 display: 'inline-block',
               }}
             />
-            Data Center Development
+            Oklahoma Land Services
           </span>
 
           {/* Heading — larger, tighter tracking */}
@@ -100,16 +100,16 @@ export default function HeroSection() {
             }}
           >
             <span className="hero-animate block" style={{ animationDelay: '100ms' }}>
-              For Advanced
+              Trusted
             </span>
             <span className="hero-animate block" style={{ animationDelay: '180ms' }}>
-              Computing &amp;
+              Land &amp;
             </span>
             <span
               className="hero-animate block"
               style={{ animationDelay: '260ms', color: 'var(--color-brand-gold)' }}
             >
-              AI Infrastructure
+              Title Services
             </span>
           </h1>
 
@@ -126,7 +126,7 @@ export default function HeroSection() {
               fontWeight: 500,
             }}
           >
-            Turning Your Vision Into Reality
+            Serving Operators Since 2009
           </p>
 
           {/* Body copy — one sentence */}
