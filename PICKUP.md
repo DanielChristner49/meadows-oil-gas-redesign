@@ -1,108 +1,76 @@
-# Session Handoff — Meadows Oil & Gas Improvements
+# Session Handoff — Meadows Oil & Gas
 
 **Date:** 2026-05-03  
-**Branch:** main  
-**Last commit:** `4802981` — Add implementation plan: Framer Motion + Sanity CMS
+**Branch:** `main` (feature branch merged and cleaned up)  
+**Live site:** https://meadows-oil-gas-redesign.vercel.app  
+**Last commit:** `50c639a` — feat: wire FAQ and resources pages to Sanity CMS  
+**Sanity Project ID:** `p90jqv5f`
 
 ---
 
-## What Was Decided This Session
+## What Is Done
 
-Two improvements were designed, specced, and planned:
+### Phase 1 — Framer Motion ✅ Live
+- `FadeUp` replaces `ScrollReveal` everywhere (Framer Motion, TDD, `useReducedMotion`)
+- `HeroParallax` — parallax oil field background on hero using `useScroll` + `useTransform`
+- `HeroSection` — Framer Motion stagger entrance animation
+- `PageTransition` — fade between routes via `AnimatePresence`
+- Navbar scroll shadow, service card hover lifts, gallery thumbnail hover lifts, stats stagger
 
-1. **Framer Motion animations** — replace existing `ScrollReveal` / IntersectionObserver / `.reveal-up` CSS system with Framer Motion. Includes a parallax oil field hero background.
-2. **Sanity CMS** — full site content management (hero, services, gallery, testimonials, jobs, FAQ, glossary).
-
-**Spec:** `docs/superpowers/specs/2026-05-03-cms-animations-design.md`  
-**Plan:** `docs/superpowers/plans/2026-05-03-cms-animations.md`
+### Phase 2 — Sanity CMS ✅ Code live, content not seeded yet
+- 7 schemas in `schemas/` (hero, service, galleryImage, testimonial, jobPosting, faqItem, glossaryTerm)
+- Sanity Studio embedded at `/studio`
+- `lib/sanity/` — client, types, GROQ queries
+- TestimonialsSection, gallery, careers, FAQ, resources — all wired to Sanity with graceful fallbacks
+- `NEXT_PUBLIC_SANITY_PROJECT_ID=p90jqv5f` set in Vercel
+- `NEXT_PUBLIC_SANITY_DATASET=production` set in Vercel
 
 ---
 
-## Security Headers Already Deployed
+## One Remaining Step: Seed Content in Sanity Studio
 
-`next.config.ts` was updated with full security headers (CSP, HSTS, X-Frame-Options, etc.) and deployed to production at commit `8395fc9`.  
-Live site: https://meadows-oil-gas-redesign.vercel.app
+Run `npm run dev`, open http://localhost:3000/studio, and create:
+
+### Hero (1 document)
+- Headline: `Trusted Land & Title Services`
+- Tagline: `Serving Operators Since 2009`
+- Body Copy: `Precise, dependable land and title solutions that empower our clients to move with confidence.`
+- Primary CTA: `Our Services` / Secondary CTA: `Contact Us`
+- Background Image: upload `public/images/hero.jpg`
+
+### Testimonials (3 documents)
+Grab the quotes from `components/home/TestimonialsSection.tsx` — authors are:
+1. R. Hartley / Land Manager / Sunbelt Petroleum Corp.
+2. D. Vasquez / Sr. Land Acquisitions / Midcontinent Energy Partners
+3. T. Morrison / Project Development Lead / Highplains Wind Partners
+
+### Job Postings (2 documents)
+Copy from `app/careers/page.tsx` — Contract Landman + GIS Specialist. Set both **Active: true**.
+
+### FAQ Items (20 documents)
+Copy from `app/faq/page.tsx`. Use section IDs as categories: `scope`, `title`, `leasing`, `wind`, `logistics`.
+
+### Glossary Terms (21 documents)
+Copy from `app/resources/page.tsx`. Categories: `title`, `leasing`, `operations`, `wind`.
 
 ---
 
-## Implementation Plan Status
+## Optional: Vercel Deploy Webhook (auto-rebuild on publish)
 
-The plan has **13 tasks** across 2 phases. **Nothing has been implemented yet** — the plan was written and committed but execution was interrupted before Task 1 started.
+1. Vercel → meadows-oil-gas-redesign → Settings → Git → Deploy Hooks → Add hook: name `Sanity Publish`, branch `main` → copy URL
+2. sanity.io → project `p90jqv5f` → API → Webhooks → Add webhook → paste URL, trigger on Create/Update/Delete → Save
 
-### Phase 1 — Framer Motion (Tasks 1–6)
+---
 
-| # | Task | Status |
-|---|---|---|
-| 1 | Install `framer-motion` + create `FadeUp` component (TDD) | ⬜ Not started |
-| 2 | Replace `ScrollReveal` with `FadeUp` across 6 files, remove old CSS | ⬜ Not started |
-| 3 | Create `HeroParallax` component (TDD) | ⬜ Not started |
-| 4 | Refactor `HeroSection` — parallax background + Framer Motion stagger entrance | ⬜ Not started |
-| 5 | Polish: `AnimatePresence` page transitions, navbar scroll shadow, card hover lifts, StatsBar stagger | ⬜ Not started |
-| 6 | Deploy Phase 1 to Vercel, smoke check | ⬜ Not started |
+## Still Pending Env Vars (pre-existing, unrelated to this session)
 
-### Phase 2 — Sanity CMS (Tasks 7–13)
-
-| # | Task | Status |
-|---|---|---|
-| 7 | `npm install sanity next-sanity`, create 7 schemas + Studio route | ⬜ Not started |
-| 8 | Create `lib/sanity/client.ts`, `types.ts`, `queries.ts` | ⬜ Not started |
-| 9 | **Manual**: seed Sanity Studio with current hardcoded content | ⬜ Not started |
-| 10 | Wire `TestimonialsSection` to Sanity | ⬜ Not started |
-| 11 | Wire gallery page to Sanity (with local image fallback) | ⬜ Not started |
-| 12 | Wire careers page to Sanity | ⬜ Not started |
-| 13 | Wire FAQ + resources pages to Sanity | ⬜ Not started |
-| 14 | Add Vercel env vars + deploy webhook + end-to-end verify | ⬜ Not started |
+| Var | Status |
+|---|---|
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | Not set — map on /about/reach won't render |
+| `FORMSPREE_ENDPOINT` | Not set — contact form won't submit |
 
 ---
 
 ## How to Resume
 
-### Option A — Subagent-Driven (approved, was about to start)
-
-Start by dispatching a fresh `general-purpose` subagent for **Task 1**. The plan has all the code you need — just read it from the plan file and paste the task text into the subagent prompt. Use the `superpowers:subagent-driven-development` skill.
-
-```
-Read plan: docs/superpowers/plans/2026-05-03-cms-animations.md
-Dispatch implementer → spec reviewer → code quality reviewer
-Then move to Task 2, etc.
-```
-
-### Option B — Just start coding
-
-Run Task 1 manually:
-```bash
-cd /Users/danielchristner/meadows-oil-gas-redesign
-npm install framer-motion
-```
-Then create `components/ui/FadeUp.tsx` and `__tests__/components/ui/FadeUp.test.tsx` using the exact code in the plan.
-
----
-
-## Key Files
-
-| File | Purpose |
-|---|---|
-| `components/ui/ScrollReveal.tsx` | **Will be deleted** in Task 2 |
-| `components/home/HeroSection.tsx` | **Will be refactored** in Task 4 |
-| `app/globals.css` | `.reveal-up`, `.is-visible`, `.hero-animate` rules get removed in Task 2 |
-| `components/ui/FadeUp.tsx` | **Create in Task 1** |
-| `components/home/HeroParallax.tsx` | **Create in Task 3** |
-
----
-
-## Current Animation System (before changes)
-
-- `components/ui/ScrollReveal.tsx` — IntersectionObserver + `.is-visible` class
-- Used in: `TestimonialsSection`, `CTASection`, `ServicesPreview`, `WhySection`, `Timeline.tsx`
-- Hero uses `hero-animate` CSS class (keyframe entrance, defined in `globals.css`)
-
----
-
-## Env Vars Still Needed on Vercel
-
-| Var | Notes |
-|---|---|
-| `NEXT_PUBLIC_MAPBOX_TOKEN` | Still not set — map on /about/reach won't render |
-| `FORMSPREE_ENDPOINT` | Still not set — contact form won't submit |
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Set when Sanity project created (Task 7) |
-| `NEXT_PUBLIC_SANITY_DATASET` | `production` (Task 7) |
+Tell Claude: "Read PICKUP.md — I need to seed the Sanity content for the Meadows website."
