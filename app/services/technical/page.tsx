@@ -34,7 +34,9 @@ export default function TechnicalPage() {
       <div
         className="section-padding"
         style={{
-          background: 'linear-gradient(135deg, #0a0a0a 0%, #0d1117 100%)',
+          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 55%, rgba(0,0,0,0.4) 100%), url(/images/services-technical.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           borderBottom: '1px solid rgba(200,146,26,0.1)',
         }}
       >

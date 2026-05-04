@@ -93,7 +93,9 @@ export default function AboutPage() {
         className="section-padding"
         style={{
           backgroundColor: '#000',
-          background: 'radial-gradient(ellipse 80% 60% at 100% 0%, rgba(200,146,26,0.07) 0%, transparent 60%), #000',
+          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.7) 55%, rgba(0,0,0,0.4) 100%), url(/images/about-hero.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         <div className="container-max px-6 sm:px-8">
