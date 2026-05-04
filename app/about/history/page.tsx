@@ -22,6 +22,13 @@ export const metadata: Metadata = {
 
 const eras: TimelineEra[] = [
   {
+    year: '1859',
+    title: "Drake Well — Birth of an Industry",
+    body: "Colonel Edwin Drake drills to 69.5 feet in Titusville, Pennsylvania and strikes oil — the first commercially successful oil well in America. The Drake Well sets off the Pennsylvania oil rush, creates the kerosene industry, and launches the era of petroleum that will define the next two centuries of American economic life. Oklahoma is still a decade away from statehood.",
+    image: 'https://upload.wikimedia.org/wikipedia/commons/d/da/First_Oil_Well.jpg',
+    imageAlt: 'Edwin Drake (right) standing in front of his well in Titusville, Pennsylvania — America\'s first commercial oil well, drilled in 1859',
+  },
+  {
     year: '1897',
     title: "Oklahoma's First Commercial Well",
     body: "Bartlesville's Nellie Johnstone No. 1 becomes Oklahoma Territory's first commercial oil producer — drilled to 1,320 feet and producing 50 barrels a day. It ignites a century-long industry that reshapes the nation's energy landscape and transforms a territory of grasslands into a global oil capital.",
@@ -29,11 +36,18 @@ const eras: TimelineEra[] = [
     imageAlt: 'Replica of the Nellie Johnstone No. 1 well, Bartlesville, Oklahoma — Oklahoma Territory\'s first commercial oil producer, 1897',
   },
   {
+    year: '1901',
+    title: 'Spindletop — The Gusher That Changed Everything',
+    body: "The Lucas gusher erupts at Spindletop near Beaumont, Texas on January 10th — blowing 100,000 barrels per day for nine days and making every well that came before it look trivial. Beaumont's population triples in three months. Gulf Oil and Texaco are born from this single strike. The age of cheap, abundant petroleum arrives — and Oklahoma wildcatters take notice.",
+    image: 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Lucas_gusher.jpg',
+    imageAlt: 'The Lucas gusher erupting at Spindletop, Beaumont, Texas, January 10, 1901 — 100,000 barrels per day for nine days, the strike that changed American oil forever',
+  },
+  {
     year: '1905',
     title: 'Glenn Pool Discovery',
-    body: "The Glenn Pool field near Tulsa triggers Oklahoma's first major oil boom — briefly making the state the world's largest oil-producing region. Oil gushers like this one erupt across the Territory as major companies race to drill, and Tulsa begins its transformation into the \"Oil Capital of the World.\"",
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Lucas_gusher.jpg',
-    imageAlt: 'Oil gusher erupting at Spindletop, 1901 — the era\'s iconic image of early American oil strikes that paralleled Oklahoma\'s Glenn Pool boom',
+    body: "The Glenn Pool field near Tulsa triggers Oklahoma's first major oil boom — briefly making the state the world's largest oil-producing region. Major companies race to drill as lease bonuses explode and Tulsa begins its transformation into the \"Oil Capital of the World.\" The demand for land professionals who can navigate Indian Territory allotment titles surges almost overnight.",
+    image: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Drake_Well%2C_June_2012.jpg',
+    imageAlt: 'Replica of the Drake-era wooden derrick and engine house — the same wooden derrick technology that drove Oklahoma\'s Glenn Pool boom in 1905',
   },
   {
     year: '1907',
@@ -71,6 +85,13 @@ const eras: TimelineEra[] = [
     imageAlt: 'Oil refinery in continuous operation since 1915 — representing the wartime industrial scale that Oklahoma\'s petroleum sector sustained throughout World War II',
   },
   {
+    year: '1960',
+    title: 'OPEC Founded — The Cartel That Moved Markets',
+    body: "Saudi Arabia, Iraq, Kuwait, Venezuela, and Iran meet in Baghdad and establish OPEC — the Organization of the Petroleum Exporting Countries. For the first time, major producing nations coordinate to control world oil supply and price. Oklahoma operators, still riding relatively stable mid-continent prices, take little notice. Thirteen years later, OPEC's oil embargo will detonate across every American energy market — including Oklahoma's.",
+    image: 'https://upload.wikimedia.org/wikipedia/commons/6/6e/158ava_Reuni%C3%B3n_de_pa%C3%ADses_miembros_de_la_OPEP_%285251965558%29.jpg',
+    imageAlt: 'OPEC member nations conference — the international body founded in 1960 that would reshape global oil markets and reverberate through Oklahoma\'s energy economy for decades',
+  },
+  {
     year: '1970s',
     title: 'Energy Crisis & Oklahoma Boom',
     body: "The OPEC oil embargo sends prices skyward and triggers the greatest Oklahoma drilling boom since the 1920s. Rigs run day and night across the mid-continent. Courthouse offices stay open late as operators race to lease every available acre. Land professionals become some of the busiest — and best-compensated — professionals in the state.",
@@ -85,11 +106,25 @@ const eras: TimelineEra[] = [
     imageAlt: 'A solitary pumpjack working a stripper well on the bare plains — the quiet symbol of an industry surviving through the 1980s oil bust',
   },
   {
+    year: '1991',
+    title: 'Gulf War & The Kuwait Oil Fires',
+    body: "Iraqi forces retreat from Kuwait, setting ablaze more than 600 oil wells in the largest petroleum fire in history. The Kuwait oil fires burn for nine months, send crude prices spiking, and remind the world — and Oklahoma operators — that geopolitics and oil prices are inseparable. The Gulf War cements U.S. strategic interest in Middle Eastern oil that shapes American energy policy for the next three decades.",
+    image: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Kuwait_burn_oilfield.png',
+    imageAlt: 'Kuwaiti oil fields burning after Iraqi forces set them ablaze during the Gulf War, 1991 — more than 600 wells lit, sending global oil prices surging',
+  },
+  {
     year: '1990s',
     title: 'Recovery & Modernization',
     body: "Oklahoma's oil sector stabilizes under independent operators who quietly rebuild the industry through disciplined land and title work. The profession matures — courthouse research, title opinion writing, ownership runs, and curative become increasingly specialized disciplines. The groundwork for the shale revolution is laid in courthouses across 77 counties.",
     image: 'https://upload.wikimedia.org/wikipedia/commons/0/06/H104.jpg',
     imageAlt: 'Modern rotary drilling rig in operation — the new generation of equipment that revived domestic production through the 1990s recovery',
+  },
+  {
+    year: '2008',
+    title: 'Oil at $147 a Barrel',
+    body: "Crude oil hits an all-time record of $147 per barrel in July 2008 — fueled by surging global demand, tight supply, and speculative trading. Oklahoma rigs multiply. Lease bonuses spike. The SCOOP and STACK plays attract major capital as operators scramble to secure acreage. The price collapses to $32 by December of the same year, but the brief peak sets the stage for a decade of aggressive mid-continent development.",
+    image: 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Development-driller-3.jpg',
+    imageAlt: 'Development Driller III — the scale of offshore and land-based drilling operations that characterized the 2008 oil price spike era',
   },
   {
     year: '2000s',
