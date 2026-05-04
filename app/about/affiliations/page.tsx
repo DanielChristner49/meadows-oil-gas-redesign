@@ -41,7 +41,7 @@ const trustPoints = [
 export default function AffiliationsPage() {
   return (
     <div>
-      <script type="application/ld+json">{JSON.stringify(breadcrumb).replace(/&/g, "\\u0026")}</script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       {/* Header */}
       <div
         className="section-padding"

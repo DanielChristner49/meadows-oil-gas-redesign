@@ -87,7 +87,7 @@ const points = [
 export default function AboutPage() {
   return (
     <div>
-      <script type="application/ld+json">{JSON.stringify(breadcrumb).replace(/&/g, "\\u0026")}</script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       {/* Dark header */}
       <div
         className="section-padding"

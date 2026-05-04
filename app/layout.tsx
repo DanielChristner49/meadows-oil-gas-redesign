@@ -140,7 +140,7 @@ export default function RootLayout({
         <Footer />
         <BackToTop />
         <MobileStickyBar />
-        <script type="application/ld+json">{JSON.stringify([localBusinessSchema, webSiteSchema]).replace(/&/g, '\\u0026')}</script>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, webSiteSchema]) }} />
       </body>
     </html>
   )

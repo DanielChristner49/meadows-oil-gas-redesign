@@ -35,7 +35,7 @@ export default async function GalleryPage() {
 
   return (
     <>
-      <script type="application/ld+json">{JSON.stringify(gallerySchema).replace(/&/g, "\\u0026")}</script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(gallerySchema) }} />
       <GalleryClient images={images} />
     </>
   )

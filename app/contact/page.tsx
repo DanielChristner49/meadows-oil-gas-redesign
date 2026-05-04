@@ -44,7 +44,7 @@ export default async function ContactPage({
   if (!FORM_ENDPOINT) throw new Error('FORMSPREE_ENDPOINT env variable is not set')
   return (
     <div>
-      <script type="application/ld+json">{JSON.stringify(contactPageSchema).replace(/&/g, "\\u0026")}</script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }} />
       {/* Header */}
       <div
         className="section-padding"

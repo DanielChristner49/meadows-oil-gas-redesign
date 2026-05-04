@@ -189,7 +189,7 @@ const deliverables: Record<string, DeliverableItem[]> = {
 export default function ProcessPage() {
   return (
     <div>
-      <script type="application/ld+json">{JSON.stringify(breadcrumb).replace(/&/g, "\\u0026")}</script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       {/* Header */}
       <div

@@ -176,7 +176,7 @@ const eras: TimelineEra[] = [
 export default function OilHistoryPage() {
   return (
     <div>
-      <script type="application/ld+json">{JSON.stringify(breadcrumb).replace(/&/g, "\\u0026")}</script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       {/* Header */}
       <div
         className="section-padding"

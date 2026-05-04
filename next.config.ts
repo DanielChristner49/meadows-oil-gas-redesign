@@ -8,7 +8,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://api.mapbox.com https://events.mapbox.com https://formspree.io https://*.sanity.io https://*.api.sanity.io wss://*.sanity.io",
+  "connect-src 'self' https://api.mapbox.com https://events.mapbox.com https://formspree.io https://*.sanity.io https://*.api.sanity.io wss://*.sanity.io https://cdn.jsdelivr.net",
   "worker-src blob:",
   "object-src 'none'",
   "frame-ancestors 'none'",

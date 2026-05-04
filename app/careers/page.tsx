@@ -66,9 +66,7 @@ export default async function CareersPage() {
   return (
     <div>
       {jobs.map((job) => (
-        <script key={job._id} type="application/ld+json">
-          {JSON.stringify(jobPostingSchema(job.title, job.description ?? '', job.employmentType)).replace(/&/g, '\\u0026')}
-        </script>
+        <script key={job._id} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema(job.title, job.description ?? '', job.employmentType)) }} />
       ))}
       {/* Header */}
       <div

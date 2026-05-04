@@ -88,8 +88,8 @@ const faqSchema = {
 export default function ServicesPage() {
   return (
     <div>
-      <script type="application/ld+json">{JSON.stringify(breadcrumb).replace(/&/g, "\\u0026")}</script>
-      <script type="application/ld+json">{JSON.stringify(faqSchema).replace(/&/g, "\\u0026")}</script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       {/* Header */}
       <div
         className="section-padding"
