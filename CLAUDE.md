@@ -60,23 +60,26 @@ npm run test     # run test suite
 - `PageTransition` — fade between routes via `AnimatePresence`
 - Navbar scroll shadow, service card hover lifts, gallery thumbnail hover lifts, stats stagger
 
-### Phase 2 — Sanity CMS ✅ Code live, content not seeded yet
+### Phase 2 — Sanity CMS ✅ Code live, content seeded 2026-05-03
 - 7 schemas in `schemas/`: hero, service, galleryImage, testimonial, jobPosting, faqItem, glossaryTerm
 - Sanity Studio embedded at `/studio`
 - `lib/sanity/` — client, types, GROQ queries
 - TestimonialsSection, gallery, careers, FAQ, resources all wired to Sanity
 - Env vars `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` set in Vercel
 
-### Pending: Seed Sanity Content
-Run `npm run dev`, open http://localhost:3000/studio, and create:
+### Sanity Content ✅ Seeded (2026-05-03)
+47 documents live in production dataset. To re-seed or update:
+```bash
+SANITY_API_TOKEN=<editor-token> node scripts/seed-sanity.mjs
+```
 
-| Document Type | Count | Source |
+| Document Type | Count | Status |
 |---|---|---|
-| Hero | 1 | Headline: "Trusted Land & Title Services", Tagline: "Serving Operators Since 2009" |
-| Testimonials | 3 | Copy from `components/home/TestimonialsSection.tsx` |
-| Job Postings | 2 | Copy from `app/careers/page.tsx` — set Active: true |
-| FAQ Items | 20 | Copy from `app/faq/page.tsx`; categories: scope, title, leasing, wind, logistics |
-| Glossary Terms | 21 | Copy from `app/resources/page.tsx`; categories: title, leasing, operations, wind |
+| Hero | 1 | ✅ Live |
+| Testimonials | 3 | ✅ Live |
+| Job Postings | 2 | ✅ Live (both active) |
+| FAQ Items | 20 | ✅ Live (5 categories) |
+| Glossary Terms | 21 | ✅ Live (4 categories) |
 
 ### Pending: Env Vars (pre-existing, unrelated to CMS)
 
